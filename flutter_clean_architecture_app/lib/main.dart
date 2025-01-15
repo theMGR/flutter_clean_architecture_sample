@@ -4,6 +4,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flearn/layers/presentation/app_root.dart';
 import 'package:flearn/layers/presentation/using_get_it/injector.dart';
+import 'package:my_pod_client/my_pod_client.dart';
+import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum StateManagementOptions {
@@ -13,10 +15,13 @@ enum StateManagementOptions {
   riverpod,
   getIt,
   mobX,
-  bluetoothEx
+  bluetoothEx,
+  serverPodEx,
 }
 
 late SharedPreferences sharedPref;
+
+var client = Client('http://$localhost:7070/')..connectivityMonitor = FlutterConnectivityMonitor();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

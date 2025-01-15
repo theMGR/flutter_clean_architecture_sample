@@ -198,6 +198,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  connectivity_plus:
+    dependency: transitive
+    description:
+      name: connectivity_plus
+      sha256: "8a68739d3ee113e51ad35583fdf9ab82c55d09d693d3c39da1aebab87c938412"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.2"
+  connectivity_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: connectivity_plus_platform_interface
+      sha256: "42657c1715d48b167930d5f34d00222ac100475f73d10162ddf43e714932f204"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   convert:
     dependency: transitive
     description:
@@ -238,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.7"
+  dbus:
+    dependency: transitive
+    description:
+      name: dbus
+      sha256: "365c771ac3b0e58845f39ec6deebc76e3276aa9922b0cc60840712094d9047ac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.10"
   diff_match_patch:
     dependency: transitive
     description:
@@ -626,6 +650,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  my_pod_client:
+    dependency: "direct main"
+    description:
+      path: "../my_pod_client"
+      relative: true
+    source: path
+    version: "0.0.0"
   nested:
     dependency: transitive
     description:
@@ -634,6 +665,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  nm:
+    dependency: transitive
+    description:
+      name: nm
+      sha256: "2c9aae4127bdc8993206464fcc063611e0e36e72018696cd9631023a31b24254"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   node_preamble:
     dependency: transitive
     description:
@@ -762,6 +801,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      sha256: c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.2"
   platform:
     dependency: transitive
     description:
@@ -826,6 +873,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  serverpod_client:
+    dependency: transitive
+    description:
+      name: serverpod_client
+      sha256: "32d3d919b64f01d840c8064ce62c2bed3c12aeaeb507302c196857e9e75fad9a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
+  serverpod_flutter:
+    dependency: "direct main"
+    description:
+      name: serverpod_flutter
+      sha256: b720c45d0af77418c8f6da1435db5ff54afb64ffb393b46deaa7cc9bb6c85b9f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
+  serverpod_serialization:
+    dependency: transitive
+    description:
+      name: serverpod_serialization
+      sha256: e5d195f42a19c178bb4a0a2c11ba0512e7421e42760c4856d88a561d2e416de1
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1087,6 +1158,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  twilio_flutter:
+    dependency: "direct main"
+    description:
+      name: twilio_flutter
+      sha256: "9ae140004609e6eef8474a53997613b29a1549161e6e65b10135aa361193587c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.0"
   typed_data:
     dependency: transitive
     description:
@@ -1167,6 +1246,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      sha256: b015a8ad1c488f66851d762d3090a21c600e479dc75e68328c52774040cf9226
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.5.0"
   yaml:
     dependency: transitive
     description:

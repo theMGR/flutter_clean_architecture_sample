@@ -11,6 +11,7 @@ import 'package:flearn/layers/presentation/using_mobx/app_using_mobx.dart';
 import 'package:flearn/layers/presentation/using_provider/app_using_provider.dart';
 import 'package:flearn/layers/presentation/using_riverpod/app_using_riverpod.dart';
 import 'package:flearn/main.dart';
+import 'package:flearn/serverpod_ex/serverpod_ex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -109,6 +110,7 @@ class _AppRootState extends State<AppRoot> {
                     _menuEntry(StateManagementOptions.provider, 'Provider', themeMode),
                     _menuEntry(StateManagementOptions.riverpod, 'Riverpod', themeMode),
                     _menuEntry(StateManagementOptions.bluetoothEx, 'Bluetooth Ex (Blue Plus)', themeMode),
+                    _menuEntry(StateManagementOptions.serverPodEx, 'Serverpod Ex', themeMode),
                   ],
                 ),
               ],
@@ -140,6 +142,8 @@ class _AppRootState extends State<AppRoot> {
         return const AppUsingRiverpod();
       case (StateManagementOptions.bluetoothEx):
         return const FlutterBlueApp();
+      case (StateManagementOptions.serverPodEx):
+        return const ServerPodEx();
       default:
         return Container();
     }
@@ -181,6 +185,8 @@ class _AppRootState extends State<AppRoot> {
         return 'RiverPod';
       case (StateManagementOptions.bluetoothEx):
         return 'Bluetooth Ex (Blue plus)';
+        case (StateManagementOptions.serverPodEx):
+        return 'ServerPod Ex';
       default:
         return '';
     }

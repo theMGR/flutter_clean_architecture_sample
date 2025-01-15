@@ -3,17 +3,13 @@ import 'package:serverpod/server.dart';
 import 'package:twilio_flutter/twilio_flutter.dart';
 
 class MobileAuthEndPoint extends Endpoint {
-
-  String accountSid = '',
-      authToken = '',
-      twilioNumber = '';
+  String accountSid = '', authToken = '', twilioNumber = '';
 
   late TwilioFlutter twilioFlutter;
 
   MobileAuthEndPoint() {
     twilioFlutter = TwilioFlutter(accountSid: accountSid, authToken: authToken, twilioNumber: twilioNumber);
   }
-
 
   Future<MobileAuthModel?> addMobileAuth(Session session, MobileAuthModel input) async {
     try {
@@ -28,6 +24,7 @@ class MobileAuthEndPoint extends Endpoint {
   Future<MobileAuthModel?> getMobileAuthByPhone(Session session, String phone) async {
     try {
       var result = await MobileAuthModel.db.findFirstRow(session, where: (p0) => p0.phone.equals(phone));
+      session.log("****> getMobileAuthByPhone ($phone): ${result?.toJson().toString()}");
       return result;
     } catch (e) {
       session.log("Failed to get auth model by phone: $e");
@@ -57,6 +54,8 @@ class MobileAuthEndPoint extends Endpoint {
     try {
       var authEntry = await getMobileAuthByPhone(session, phone);
 
+      session.log('****> verifyOTP : ${authEntry?.toJson().toString()} ');
+
       if (authEntry != null) {
         if (authEntry.otp == otp && authEntry.otpExpiration?.isAfter(DateTime.now()) == true) {
           return true;
@@ -82,7 +81,8 @@ class MobileAuthEndPoint extends Endpoint {
       if (authEntry != null) {
         authEntry.otp = otp;
         authEntry.otpExpiration = DateTime.now().add(Duration(minutes: 5));
-        await MobileAuthModel.db.updateRow(session, authEntry);
+        var update = await MobileAuthModel.db.updateRow(session, authEntry);
+        session.log('****> generateOTP update: ${update.toJson().toString()}');
       } else {
         var authEntry = MobileAuthModel(
           phone: phone,
@@ -93,7 +93,9 @@ class MobileAuthEndPoint extends Endpoint {
           updatedAt: DateTime.now().toUtc(),
         );
 
-        await addMobileAuth(session, authEntry);
+        var update = await addMobileAuth(session, authEntry);
+
+        session.log('****> generateOTP update: ${update?.toJson().toString()}');
 
         await twilioFlutter.sendSMS(toNumber: phone, messageBody: 'Your OTP is $otp, it will expired in 5 minutes');
       }
@@ -106,9 +108,7 @@ class MobileAuthEndPoint extends Endpoint {
   }
 
   String _generateRandomOTP() {
-    final random = DateTime
-        .now()
-        .microsecondsSinceEpoch % 10000;
+    final random = DateTime.now().microsecondsSinceEpoch % 10000;
     return random.toString().padLeft(4, '0');
   }
 }
