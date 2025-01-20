@@ -26,3 +26,7 @@ mongoose.connect(DB).then(() => {
 }).catch((reason) => {
     console.log(`mongo db error: ${reason}`);
 });
+
+const authRoute = require('./routes/authRoute');
+app.use(express.json());
+app.use(authRoute);

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030901590698",
+    "project_id": "flearn-de6f4",
+    "storage_bucket": "flearn-de6f4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030901590698:android:7948396f6e3ce40d6ffed3",
+        "android_client_info": {
+          "package_name": "com.flearn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-m8js3WMgHwVqGvmWGRCLRuYk8VKlkN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

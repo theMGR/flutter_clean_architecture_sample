@@ -30,7 +30,8 @@ class CharacterDto extends Character {
   // ---------------------------------------------------------------------------
   // Maps
   // ---------------------------------------------------------------------------
-  factory CharacterDto.fromMap(Map<String, dynamic> json) => CharacterDto(
+  factory CharacterDto.fromMap(Map<String, dynamic> json) =>
+      CharacterDto(
         id: json['id'],
         name: json['name'],
         status: json['status'],
@@ -38,7 +39,7 @@ class CharacterDto extends Character {
         type: json['type'],
         gender: json['gender'],
         origin:
-            json['origin'] == null ? null : LocationDto.fromMap(json['origin']),
+        json['origin'] == null ? null : LocationDto.fromMap(json['origin']),
         location: json['location'] == null
             ? null
             : LocationDto.fromMap(json['location']),
@@ -48,10 +49,11 @@ class CharacterDto extends Character {
             : List<String>.from(json['episode']!.map((dynamic x) => x)),
         url: json['url'],
         created:
-            json['created'] == null ? null : DateTime.parse(json['created']),
+        json['created'] == null ? null : DateTime.parse(json['created']),
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() =>
+      {
         'id': id,
         'name': name,
         'status': status,
@@ -59,7 +61,7 @@ class CharacterDto extends Character {
         'type': type,
         'gender': gender,
         'origin':
-            origin != null ? LocationDto.fromLocation(origin!).toMap() : null,
+        origin != null ? LocationDto.fromLocation(origin!).toMap() : null,
         'location': location != null
             ? LocationDto.fromLocation(location!).toMap()
             : null,

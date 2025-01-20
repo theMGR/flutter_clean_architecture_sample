@@ -12,7 +12,7 @@ class TwilioEx extends StatefulWidget {
 }
 
 class _TwilioExState extends State<TwilioEx> {
-  String accountSid = '', authToken = '', twilioNumber = '', messagingServiceSid = '';
+  String accountSid = 'ACf984d44380439d93a2e3a65f25557e78', authToken = '17b13ef97719666f498e31e86255f57e', twilioNumber = '+16203028456', messagingServiceSid = 'MG7af6cc09dec12002710b0224d98e4d86';
 
   late TwilioFlutter twilioFlutter;
   late TwilioMessagingService twilioMessagingService;

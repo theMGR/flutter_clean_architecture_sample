@@ -3,7 +3,7 @@ import 'package:serverpod/server.dart';
 import 'package:twilio_flutter/twilio_flutter.dart';
 
 class MobileAuthEndPoint extends Endpoint {
-  String accountSid = '', authToken = '', twilioNumber = '';
+  String accountSid = 'ACf984d44380439d93a2e3a65f25557e78', authToken = '17b13ef97719666f498e31e86255f57e', twilioNumber = '+16203028456';
 
   late TwilioFlutter twilioFlutter;
 
