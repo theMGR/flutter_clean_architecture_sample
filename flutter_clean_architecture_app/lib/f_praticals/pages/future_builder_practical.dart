@@ -40,7 +40,7 @@ class _FutureBuilderPracticalState extends State<FutureBuilderPractical> {
                           child: Row(
                             children: [
                               Image.network(item.thumbnailUrl!, width: 60, height: 60, fit: BoxFit.cover, alignment: Alignment.center, errorBuilder: (context, error, stackTrace) {
-                                return const Placeholder();
+                                return const Placeholder(fallbackHeight: 60, fallbackWidth: 60);
                               }),
                               const SizedBox(width: 10),
                               Expanded(
