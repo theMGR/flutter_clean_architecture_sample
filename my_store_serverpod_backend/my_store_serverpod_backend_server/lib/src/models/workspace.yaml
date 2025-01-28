@@ -1,0 +1,8 @@
+class: Workspace
+table: workspace
+fields:
+  userId: int, relation(parent=user)
+  name: String
+  handle: String
+  visibility: String
+  members: List<Member>?, !persist

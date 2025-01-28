@@ -1,0 +1,13 @@
+class: Card
+table: card
+fields:
+  listId: int, relation(parent=listboard)
+  userId: int, relation(parent=user)
+  name: String
+  description: String?
+  startDate: DateTime?
+  dueDate: DateTime?
+  attachment: bool?
+  archived: bool?
+  checklist: bool?
+  comments: bool?

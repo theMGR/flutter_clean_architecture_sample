@@ -1,2 +1,8 @@
 example:
   - hello:
+mobileAuthEndPoint:
+  - addMobileAuth:
+  - getMobileAuthByPhone:
+  - updateToken:
+  - verifyOTP:
+  - generateOTP:

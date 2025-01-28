@@ -1,0 +1,8 @@
+class: ListBoard
+table: listboard
+fields:
+  boardId: int, relation(parent=board)
+  userId: int, relation(parent=user)
+  name: String
+  archived: bool?
+  cards: List<Card>?, !persist

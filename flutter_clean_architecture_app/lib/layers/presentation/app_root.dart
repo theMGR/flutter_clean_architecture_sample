@@ -63,57 +63,60 @@ class _AppRootState extends State<AppRoot> {
           final cs = Theme.of(context).colorScheme;
           return Scaffold(
             extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              title: Transform.translate(
-                offset: const Offset(10, 0),
-                child: Text(
-                  'Rick & Morty\n(${getTitleToOption(_currentOption)})',
-                  style: tt.headlineLarge!.copyWith(
-                    color: cs.onSurfaceVariant,
-                    fontWeight: FontWeight.bold,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(56),
+              child: AppBar(backgroundColor: Colors.blue,
+                title: Transform.translate(
+                  offset: const Offset(10, 0),
+                  child: Text(
+                    'Flearn (${getTitleToOption(_currentOption)})',
+                    style: tt.titleMedium!.copyWith(
+                      color: cs.onSurfaceVariant,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ).animate().fadeIn(delay: .8.seconds, duration: .7.seconds),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    final useLight = themeMode == ThemeMode.dark ? true : false;
-                    handleBrightnessChange(useLight);
-                  },
-                  icon: const Icon(Icons.light_mode),
-                ),
-                PopupMenuButton<StateManagementOptions>(
-                  onSelected: (value) async {
-                    if (value == StateManagementOptions.bluetoothEx) {
-                      /*if (await Permission.bluetooth.isGranted == true) {
+                ).animate().fadeIn(delay: .8.seconds, duration: .7.seconds),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      final useLight = themeMode == ThemeMode.dark ? true : false;
+                      handleBrightnessChange(useLight);
+                    },
+                    icon: const Icon(Icons.light_mode),
+                  ),
+                  PopupMenuButton<StateManagementOptions>(
+                    onSelected: (value) async {
+                      if (value == StateManagementOptions.bluetoothEx) {
+                        /*if (await Permission.bluetooth.isGranted == true) {
+                          setState(() {
+                            _currentOption = value;
+                          });
+                        } else {
+                          Snackbar.show(ABC.b, "Request bluetooth permission", success: false);
+                          await Permission.bluetooth.request();
+                        }*/
                         setState(() {
                           _currentOption = value;
                         });
                       } else {
-                        Snackbar.show(ABC.b, "Request bluetooth permission", success: false);
-                        await Permission.bluetooth.request();
-                      }*/
-                      setState(() {
-                        _currentOption = value;
-                      });
-                    } else {
-                      setState(() {
-                        _currentOption = value;
-                      });
-                    }
-                  },
-                  itemBuilder: (context) => [
-                    _menuEntry(StateManagementOptions.bloc, 'Bloc', themeMode),
-                    _menuEntry(StateManagementOptions.cubit, 'Cubit', themeMode),
-                    _menuEntry(StateManagementOptions.mobX, 'MobX', themeMode),
-                    _menuEntry(StateManagementOptions.getIt, 'GetIT', themeMode),
-                    _menuEntry(StateManagementOptions.provider, 'Provider', themeMode),
-                    _menuEntry(StateManagementOptions.riverpod, 'Riverpod', themeMode),
-                    _menuEntry(StateManagementOptions.bluetoothEx, 'Bluetooth Ex (Blue Plus)', themeMode),
-                    _menuEntry(StateManagementOptions.serverPodEx, 'Serverpod Ex', themeMode),
-                  ],
-                ),
-              ],
+                        setState(() {
+                          _currentOption = value;
+                        });
+                      }
+                    },
+                    itemBuilder: (context) => [
+                      _menuEntry(StateManagementOptions.bloc, 'Bloc', themeMode),
+                      _menuEntry(StateManagementOptions.cubit, 'Cubit', themeMode),
+                      _menuEntry(StateManagementOptions.mobX, 'MobX', themeMode),
+                      _menuEntry(StateManagementOptions.getIt, 'GetIT', themeMode),
+                      _menuEntry(StateManagementOptions.provider, 'Provider', themeMode),
+                      _menuEntry(StateManagementOptions.riverpod, 'Riverpod', themeMode),
+                      _menuEntry(StateManagementOptions.bluetoothEx, 'Bluetooth Ex (Blue Plus)', themeMode),
+                      _menuEntry(StateManagementOptions.serverPodEx, 'Serverpod Ex', themeMode),
+                    ],
+                  ),
+                ],
+              ),
             ),
             body: _getAppUsing(stateManagement: _currentOption).animate().fadeIn(delay: 1.2.seconds, duration: .7.seconds),
           );

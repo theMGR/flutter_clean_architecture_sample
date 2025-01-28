@@ -11,7 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'protocol.dart' as _i3;
+import 'package:my_store_serverpod_backend_client/src/protocol/mobile_auth_model.dart'
+    as _i3;
+import 'protocol.dart' as _i4;
 
 /// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
@@ -24,6 +26,61 @@ class EndpointExample extends _i1.EndpointRef {
         'example',
         'hello',
         {'name': name},
+      );
+}
+
+/// {@category Endpoint}
+class EndpointMobileAuthEndPoint extends _i1.EndpointRef {
+  EndpointMobileAuthEndPoint(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'mobileAuthEndPoint';
+
+  _i2.Future<_i3.MobileAuthModel?> addMobileAuth(_i3.MobileAuthModel input) =>
+      caller.callServerEndpoint<_i3.MobileAuthModel?>(
+        'mobileAuthEndPoint',
+        'addMobileAuth',
+        {'input': input},
+      );
+
+  _i2.Future<_i3.MobileAuthModel?> getMobileAuthByPhone(String phone) =>
+      caller.callServerEndpoint<_i3.MobileAuthModel?>(
+        'mobileAuthEndPoint',
+        'getMobileAuthByPhone',
+        {'phone': phone},
+      );
+
+  _i2.Future<bool> updateToken(
+    String phone,
+    String token,
+  ) =>
+      caller.callServerEndpoint<bool>(
+        'mobileAuthEndPoint',
+        'updateToken',
+        {
+          'phone': phone,
+          'token': token,
+        },
+      );
+
+  _i2.Future<bool> verifyOTP(
+    String phone,
+    String otp,
+  ) =>
+      caller.callServerEndpoint<bool>(
+        'mobileAuthEndPoint',
+        'verifyOTP',
+        {
+          'phone': phone,
+          'otp': otp,
+        },
+      );
+
+  _i2.Future<String?> generateOTP(String phone) =>
+      caller.callServerEndpoint<String?>(
+        'mobileAuthEndPoint',
+        'generateOTP',
+        {'phone': phone},
       );
 }
 
@@ -43,7 +100,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i3.Protocol(),
+          _i4.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -54,12 +111,18 @@ class Client extends _i1.ServerpodClientShared {
               disconnectStreamsOnLostInternetConnection,
         ) {
     example = EndpointExample(this);
+    mobileAuthEndPoint = EndpointMobileAuthEndPoint(this);
   }
 
   late final EndpointExample example;
 
+  late final EndpointMobileAuthEndPoint mobileAuthEndPoint;
+
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'example': example};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'example': example,
+        'mobileAuthEndPoint': mobileAuthEndPoint,
+      };
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};

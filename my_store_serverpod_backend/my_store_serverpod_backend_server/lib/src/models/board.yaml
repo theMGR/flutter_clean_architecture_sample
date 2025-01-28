@@ -1,0 +1,20 @@
+class: Board
+table: board
+fields:
+  workspaceId: int, relation(parent=workspace)
+  userId: int, relation(parent=user)
+  name: String
+  description: String?
+  visibility: String
+  background: String?
+  starred: bool?
+  enableCover: bool?
+  watch: bool?
+  availableOffline: bool?
+  label: String?
+  emailAddress: String?
+  commenting: int?
+  memberType: bool?
+  pinned: bool?
+  selfJoin: bool?
+  close: bool?

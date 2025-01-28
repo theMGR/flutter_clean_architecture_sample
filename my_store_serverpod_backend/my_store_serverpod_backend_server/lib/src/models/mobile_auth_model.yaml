@@ -1,0 +1,16 @@
+class: MobileAuthModel
+table: mobile_auth
+
+fields:
+  phone:
+    type: String?
+  otp:
+    type: String?
+  token:
+    type: String?
+  otpExpiration:
+    type: DateTime?
+  createdAt:
+    type: DateTime?
+  updatedAt:
+    type: DateTime?

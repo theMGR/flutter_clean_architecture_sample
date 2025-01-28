@@ -39,6 +39,39 @@ class ServerPodExState extends State<ServerPodEx> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //appBar: AppBar(title: Text('dsada'),),
+      body: ListView(
+        padding: EdgeInsets.all(10),
+        shrinkWrap: true,
+        children: [
+          SizedBox(height: 60),
+          TextField(
+            controller: _textEditingController,
+            decoration: const InputDecoration(
+              hintText: 'Enter your name',
+            ),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: _callHello,
+            child: const Text('Send to Server'),
+          ),
+          SizedBox(height: 10),
+          _ResultDisplay(
+            resultMessage: _resultMessage,
+            errorMessage: _errorMessage,
+          ),
+          SizedBox(height: 30),
+          TwilioEx()
+        ],
+      ),
+    );
+
+
+
+
+
+    return Scaffold(
       //appBar: AppBar(title: Text('data'),),
       body: SingleChildScrollView(
         child: Padding(
@@ -64,7 +97,7 @@ class ServerPodExState extends State<ServerPodEx> {
                 errorMessage: _errorMessage,
               ),
               SizedBox(height: 30),
-              TwilioEx()
+              //TwilioEx()
             ],
           ),
         ),

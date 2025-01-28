@@ -1162,10 +1162,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  my_pod_client:
+  my_store_serverpod_backend_client:
     dependency: "direct main"
     description:
-      path: "../my_pod_client"
+      path: "../my_store_serverpod_backend/my_store_serverpod_backend_client"
       relative: true
     source: path
     version: "0.0.0"

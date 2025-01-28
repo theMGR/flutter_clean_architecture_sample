@@ -1,0 +1,7 @@
+class: Member
+table: table
+fields:
+  workspaceId: int, relation(parent=workspace)
+  userId: int, relation(parent=user)
+  name: String
+  role: String

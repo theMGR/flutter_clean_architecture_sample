@@ -20,3 +20,10 @@ class ExampleEndpoint extends Endpoint {
     return ExampleUtil.buildGreeting(name);
   }
 }
+
+
+
+// POSTMAN
+// method: post
+// url: http://localhost:8080/example
+// body -> raw -> json -> {  "method": "hello", "name": "mahendhraa" }

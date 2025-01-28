@@ -37,8 +37,10 @@ dependencies:
   flutter_blue_plus: ^1.35.1
   permission_handler: ^11.3.1
   serverpod_flutter: 2.3.1
-  my_pod_client:
-    path: ../my_pod_client
+#  my_pod_client:
+#    path: ../my_pod_client
+  my_store_serverpod_backend_client:
+    path: ../my_store_serverpod_backend/my_store_serverpod_backend_client
   twilio_flutter: ^0.9.0
 #  http: ^1.2.2
   image_picker: ^1.1.2
