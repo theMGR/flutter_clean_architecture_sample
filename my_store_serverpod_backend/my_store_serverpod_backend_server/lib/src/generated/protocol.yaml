@@ -6,3 +6,6 @@ mobileAuthEndPoint:
   - updateToken:
   - verifyOTP:
   - generateOTP:
+userEndPoints:
+  - addUser:
+  - getAllUsers:

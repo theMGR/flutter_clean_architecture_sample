@@ -12,8 +12,11 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/example_endpoint.dart' as _i2;
 import '../endpoints/mobile_auth_endpoints.dart' as _i3;
+import '../endpoints/user_endpoints.dart' as _i4;
 import 'package:my_store_serverpod_backend_server/src/generated/mobile_auth_model.dart'
-    as _i4;
+    as _i5;
+import 'package:my_store_serverpod_backend_server/src/generated/user.dart'
+    as _i6;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -29,6 +32,12 @@ class Endpoints extends _i1.EndpointDispatch {
         ..initialize(
           server,
           'mobileAuthEndPoint',
+          null,
+        ),
+      'userEndPoints': _i4.UserEndPoints()
+        ..initialize(
+          server,
+          'userEndPoints',
           null,
         ),
     };
@@ -65,7 +74,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'input': _i1.ParameterDescription(
               name: 'input',
-              type: _i1.getType<_i4.MobileAuthModel>(),
+              type: _i1.getType<_i5.MobileAuthModel>(),
               nullable: false,
             )
           },
@@ -166,6 +175,40 @@ class Endpoints extends _i1.EndpointDispatch {
             session,
             params['phone'],
           ),
+        ),
+      },
+    );
+    connectors['userEndPoints'] = _i1.EndpointConnector(
+      name: 'userEndPoints',
+      endpoint: endpoints['userEndPoints']!,
+      methodConnectors: {
+        'addUser': _i1.MethodConnector(
+          name: 'addUser',
+          params: {
+            'user': _i1.ParameterDescription(
+              name: 'user',
+              type: _i1.getType<_i6.User>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['userEndPoints'] as _i4.UserEndPoints).addUser(
+            session,
+            params['user'],
+          ),
+        ),
+        'getAllUsers': _i1.MethodConnector(
+          name: 'getAllUsers',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['userEndPoints'] as _i4.UserEndPoints)
+                  .getAllUsers(session),
         ),
       },
     );

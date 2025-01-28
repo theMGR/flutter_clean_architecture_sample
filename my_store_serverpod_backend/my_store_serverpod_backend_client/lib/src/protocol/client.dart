@@ -13,7 +13,9 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:my_store_serverpod_backend_client/src/protocol/mobile_auth_model.dart'
     as _i3;
-import 'protocol.dart' as _i4;
+import 'package:my_store_serverpod_backend_client/src/protocol/user.dart'
+    as _i4;
+import 'protocol.dart' as _i5;
 
 /// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
@@ -84,6 +86,28 @@ class EndpointMobileAuthEndPoint extends _i1.EndpointRef {
       );
 }
 
+/// {@category Endpoint}
+class EndpointUserEndPoints extends _i1.EndpointRef {
+  EndpointUserEndPoints(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'userEndPoints';
+
+  _i2.Future<_i4.User> addUser(_i4.User user) =>
+      caller.callServerEndpoint<_i4.User>(
+        'userEndPoints',
+        'addUser',
+        {'user': user},
+      );
+
+  _i2.Future<List<_i4.User>> getAllUsers() =>
+      caller.callServerEndpoint<List<_i4.User>>(
+        'userEndPoints',
+        'getAllUsers',
+        {},
+      );
+}
+
 class Client extends _i1.ServerpodClientShared {
   Client(
     String host, {
@@ -100,7 +124,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i4.Protocol(),
+          _i5.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -112,16 +136,20 @@ class Client extends _i1.ServerpodClientShared {
         ) {
     example = EndpointExample(this);
     mobileAuthEndPoint = EndpointMobileAuthEndPoint(this);
+    userEndPoints = EndpointUserEndPoints(this);
   }
 
   late final EndpointExample example;
 
   late final EndpointMobileAuthEndPoint mobileAuthEndPoint;
 
+  late final EndpointUserEndPoints userEndPoints;
+
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'example': example,
         'mobileAuthEndPoint': mobileAuthEndPoint,
+        'userEndPoints': userEndPoints,
       };
 
   @override

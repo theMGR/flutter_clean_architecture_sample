@@ -23,6 +23,8 @@ import 'member.dart' as _i11;
 import 'mobile_auth_model.dart' as _i12;
 import 'user.dart' as _i13;
 import 'workspace.dart' as _i14;
+import 'package:my_store_serverpod_backend_server/src/generated/user.dart'
+    as _i15;
 export 'activity.dart';
 export 'attachment.dart';
 export 'board.dart';
@@ -1043,6 +1045,10 @@ class Protocol extends _i1.SerializationManagerServer {
       return (data != null
           ? (data as List).map((e) => deserialize<_i11.Member>(e)).toList()
           : null) as dynamic;
+    }
+    if (t == List<_i15.User>) {
+      return (data as List).map((e) => deserialize<_i15.User>(e)).toList()
+          as dynamic;
     }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
