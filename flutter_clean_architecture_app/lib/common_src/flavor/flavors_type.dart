@@ -9,4 +9,10 @@ class FlavorsType {
   static String liteQa = "LITE_QA";
   static String liteUat = "LITE_UAT";
   static String liteDemo = "LITE_DEMO";
+
+  static String free = "FREE";
+  static String freeDev = "FREE_DEV";
+  static String freeQa = "FREE_QA";
+  static String freeUat = "FREE_UAT";
+  static String freeDemo = "FREE_DEMO";
 }

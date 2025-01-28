@@ -3,13 +3,13 @@ services:
   postgres:
     image: postgres:16.3
     ports:
-      - '7090:5432'
+      - '8090:5432'
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_DB: my_pod
-      POSTGRES_PASSWORD: "niZekJu-cDOeteXdyROxrz-eYdb5_8Qz"
+      POSTGRES_DB: my_store_serverpod_backend
+      POSTGRES_PASSWORD: "OzMOmvIBqyj8ksfCwUgY1RMN_gpZ5n19"
     volumes:
-      - my_pod_data:/var/lib/postgresql/data
+      - my_store_serverpod_backend_data:/var/lib/postgresql/data
     profiles:
       - '' # Default profile
       - dev
@@ -17,7 +17,7 @@ services:
     image: redis:6.2.6
     ports:
       - '8091:6379'
-    command: redis-server --requirepass "JKKITKTRzWrxVqmz7hlQEob17jvM--FI"
+    command: redis-server --requirepass "qXyQS3b5QKzoresp131kepkVpx3DBFds"
     environment:
       - REDIS_REPLICATION_MODE=master
     profiles:
@@ -31,10 +31,10 @@ services:
       - '9090:5432'
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_DB: my_pod_test
-      POSTGRES_PASSWORD: "HXnds7QHAoezwEVLQPZwGOin705UcJf3"
+      POSTGRES_DB: my_store_serverpod_backend_test
+      POSTGRES_PASSWORD: "P6JFQXcCPKRdsrCFVilfZtT4lO3p7AvR"
     volumes:
-      - my_pod_test_data:/var/lib/postgresql/data
+      - my_store_serverpod_backend_test_data:/var/lib/postgresql/data
     profiles:
       - '' # Default profile
       - test
@@ -42,7 +42,7 @@ services:
     image: redis:6.2.6
     ports:
       - '9091:6379'
-    command: redis-server --requirepass "TfInysFmDtxcL9fd6-FifGta6A6poUDK"
+    command: redis-server --requirepass "yQdumQ3FDjl6GszUuD8I03dU9mgpTje2"
     environment:
       - REDIS_REPLICATION_MODE=master
     profiles:
@@ -50,5 +50,5 @@ services:
       - test
 
 volumes:
-  my_pod_data:
-  my_pod_test_data:
+  my_store_serverpod_backend_data:
+  my_store_serverpod_backend_test_data:

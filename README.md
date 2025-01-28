@@ -7,7 +7,7 @@ serverpod create mypod
 
 ----------------------------
 
-cd mypod/mypod_server
+cd mypod_server
 docker compose up --build --detach
 dart bin/main.dart --apply-migrations
 
