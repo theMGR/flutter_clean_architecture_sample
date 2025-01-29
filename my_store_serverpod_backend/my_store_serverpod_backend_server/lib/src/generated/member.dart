@@ -151,7 +151,7 @@ class _MemberImpl extends Member {
 }
 
 class MemberTable extends _i1.Table {
-  MemberTable({super.tableRelation}) : super(tableName: 'table') {
+  MemberTable({super.tableRelation}) : super(tableName: 'member') {
     workspaceId = _i1.ColumnInt(
       'workspaceId',
       this,

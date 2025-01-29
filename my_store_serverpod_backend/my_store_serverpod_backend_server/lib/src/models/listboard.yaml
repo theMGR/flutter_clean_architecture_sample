@@ -1,8 +1,8 @@
-class: ListBoard
+class: Listboard
 table: listboard
 fields:
   boardId: int, relation(parent=board)
-  userId: int, relation(parent=user)
+  userId: int, relation(parent=trellouser)
   name: String
   archived: bool?
-  cards: List<Card>?, !persist
+  cards: List<Cardlist>?, !persist

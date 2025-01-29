@@ -12,8 +12,8 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'card.dart' as _i2;
 
-abstract class ListBoard implements _i1.TableRow, _i1.ProtocolSerialization {
-  ListBoard._({
+abstract class Listboard implements _i1.TableRow, _i1.ProtocolSerialization {
+  Listboard._({
     this.id,
     required this.boardId,
     required this.userId,
@@ -22,31 +22,31 @@ abstract class ListBoard implements _i1.TableRow, _i1.ProtocolSerialization {
     this.cards,
   });
 
-  factory ListBoard({
+  factory Listboard({
     int? id,
     required int boardId,
     required int userId,
     required String name,
     bool? archived,
-    List<_i2.Card>? cards,
-  }) = _ListBoardImpl;
+    List<_i2.Cardlist>? cards,
+  }) = _ListboardImpl;
 
-  factory ListBoard.fromJson(Map<String, dynamic> jsonSerialization) {
-    return ListBoard(
+  factory Listboard.fromJson(Map<String, dynamic> jsonSerialization) {
+    return Listboard(
       id: jsonSerialization['id'] as int?,
       boardId: jsonSerialization['boardId'] as int,
       userId: jsonSerialization['userId'] as int,
       name: jsonSerialization['name'] as String,
       archived: jsonSerialization['archived'] as bool?,
       cards: (jsonSerialization['cards'] as List?)
-          ?.map((e) => _i2.Card.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => _i2.Cardlist.fromJson((e as Map<String, dynamic>)))
           .toList(),
     );
   }
 
-  static final t = ListBoardTable();
+  static final t = ListboardTable();
 
-  static const db = ListBoardRepository._();
+  static const db = ListboardRepository._();
 
   @override
   int? id;
@@ -59,18 +59,18 @@ abstract class ListBoard implements _i1.TableRow, _i1.ProtocolSerialization {
 
   bool? archived;
 
-  List<_i2.Card>? cards;
+  List<_i2.Cardlist>? cards;
 
   @override
   _i1.Table get table => t;
 
-  ListBoard copyWith({
+  Listboard copyWith({
     int? id,
     int? boardId,
     int? userId,
     String? name,
     bool? archived,
-    List<_i2.Card>? cards,
+    List<_i2.Cardlist>? cards,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -97,26 +97,26 @@ abstract class ListBoard implements _i1.TableRow, _i1.ProtocolSerialization {
     };
   }
 
-  static ListBoardInclude include() {
-    return ListBoardInclude._();
+  static ListboardInclude include() {
+    return ListboardInclude._();
   }
 
-  static ListBoardIncludeList includeList({
-    _i1.WhereExpressionBuilder<ListBoardTable>? where,
+  static ListboardIncludeList includeList({
+    _i1.WhereExpressionBuilder<ListboardTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<ListBoardTable>? orderBy,
+    _i1.OrderByBuilder<ListboardTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<ListBoardTable>? orderByList,
-    ListBoardInclude? include,
+    _i1.OrderByListBuilder<ListboardTable>? orderByList,
+    ListboardInclude? include,
   }) {
-    return ListBoardIncludeList._(
+    return ListboardIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(ListBoard.t),
+      orderBy: orderBy?.call(Listboard.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(ListBoard.t),
+      orderByList: orderByList?.call(Listboard.t),
       include: include,
     );
   }
@@ -129,14 +129,14 @@ abstract class ListBoard implements _i1.TableRow, _i1.ProtocolSerialization {
 
 class _Undefined {}
 
-class _ListBoardImpl extends ListBoard {
-  _ListBoardImpl({
+class _ListboardImpl extends Listboard {
+  _ListboardImpl({
     int? id,
     required int boardId,
     required int userId,
     required String name,
     bool? archived,
-    List<_i2.Card>? cards,
+    List<_i2.Cardlist>? cards,
   }) : super._(
           id: id,
           boardId: boardId,
@@ -147,7 +147,7 @@ class _ListBoardImpl extends ListBoard {
         );
 
   @override
-  ListBoard copyWith({
+  Listboard copyWith({
     Object? id = _Undefined,
     int? boardId,
     int? userId,
@@ -155,21 +155,21 @@ class _ListBoardImpl extends ListBoard {
     Object? archived = _Undefined,
     Object? cards = _Undefined,
   }) {
-    return ListBoard(
+    return Listboard(
       id: id is int? ? id : this.id,
       boardId: boardId ?? this.boardId,
       userId: userId ?? this.userId,
       name: name ?? this.name,
       archived: archived is bool? ? archived : this.archived,
-      cards: cards is List<_i2.Card>?
+      cards: cards is List<_i2.Cardlist>?
           ? cards
           : this.cards?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }
 
-class ListBoardTable extends _i1.Table {
-  ListBoardTable({super.tableRelation}) : super(tableName: 'listboard') {
+class ListboardTable extends _i1.Table {
+  ListboardTable({super.tableRelation}) : super(tableName: 'listboard') {
     boardId = _i1.ColumnInt(
       'boardId',
       this,
@@ -206,19 +206,19 @@ class ListBoardTable extends _i1.Table {
       ];
 }
 
-class ListBoardInclude extends _i1.IncludeObject {
-  ListBoardInclude._();
+class ListboardInclude extends _i1.IncludeObject {
+  ListboardInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => ListBoard.t;
+  _i1.Table get table => Listboard.t;
 }
 
-class ListBoardIncludeList extends _i1.IncludeList {
-  ListBoardIncludeList._({
-    _i1.WhereExpressionBuilder<ListBoardTable>? where,
+class ListboardIncludeList extends _i1.IncludeList {
+  ListboardIncludeList._({
+    _i1.WhereExpressionBuilder<ListboardTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -226,33 +226,33 @@ class ListBoardIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(ListBoard.t);
+    super.where = where?.call(Listboard.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => ListBoard.t;
+  _i1.Table get table => Listboard.t;
 }
 
-class ListBoardRepository {
-  const ListBoardRepository._();
+class ListboardRepository {
+  const ListboardRepository._();
 
-  Future<List<ListBoard>> find(
+  Future<List<Listboard>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ListBoardTable>? where,
+    _i1.WhereExpressionBuilder<ListboardTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<ListBoardTable>? orderBy,
+    _i1.OrderByBuilder<ListboardTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<ListBoardTable>? orderByList,
+    _i1.OrderByListBuilder<ListboardTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<ListBoard>(
-      where: where?.call(ListBoard.t),
-      orderBy: orderBy?.call(ListBoard.t),
-      orderByList: orderByList?.call(ListBoard.t),
+    return session.db.find<Listboard>(
+      where: where?.call(Listboard.t),
+      orderBy: orderBy?.call(Listboard.t),
+      orderByList: orderByList?.call(Listboard.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -260,125 +260,125 @@ class ListBoardRepository {
     );
   }
 
-  Future<ListBoard?> findFirstRow(
+  Future<Listboard?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ListBoardTable>? where,
+    _i1.WhereExpressionBuilder<ListboardTable>? where,
     int? offset,
-    _i1.OrderByBuilder<ListBoardTable>? orderBy,
+    _i1.OrderByBuilder<ListboardTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<ListBoardTable>? orderByList,
+    _i1.OrderByListBuilder<ListboardTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<ListBoard>(
-      where: where?.call(ListBoard.t),
-      orderBy: orderBy?.call(ListBoard.t),
-      orderByList: orderByList?.call(ListBoard.t),
+    return session.db.findFirstRow<Listboard>(
+      where: where?.call(Listboard.t),
+      orderBy: orderBy?.call(Listboard.t),
+      orderByList: orderByList?.call(Listboard.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  Future<ListBoard?> findById(
+  Future<Listboard?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<ListBoard>(
+    return session.db.findById<Listboard>(
       id,
       transaction: transaction,
     );
   }
 
-  Future<List<ListBoard>> insert(
+  Future<List<Listboard>> insert(
     _i1.Session session,
-    List<ListBoard> rows, {
+    List<Listboard> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<ListBoard>(
+    return session.db.insert<Listboard>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<ListBoard> insertRow(
+  Future<Listboard> insertRow(
     _i1.Session session,
-    ListBoard row, {
+    Listboard row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<ListBoard>(
+    return session.db.insertRow<Listboard>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<ListBoard>> update(
+  Future<List<Listboard>> update(
     _i1.Session session,
-    List<ListBoard> rows, {
-    _i1.ColumnSelections<ListBoardTable>? columns,
+    List<Listboard> rows, {
+    _i1.ColumnSelections<ListboardTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<ListBoard>(
+    return session.db.update<Listboard>(
       rows,
-      columns: columns?.call(ListBoard.t),
+      columns: columns?.call(Listboard.t),
       transaction: transaction,
     );
   }
 
-  Future<ListBoard> updateRow(
+  Future<Listboard> updateRow(
     _i1.Session session,
-    ListBoard row, {
-    _i1.ColumnSelections<ListBoardTable>? columns,
+    Listboard row, {
+    _i1.ColumnSelections<ListboardTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<ListBoard>(
+    return session.db.updateRow<Listboard>(
       row,
-      columns: columns?.call(ListBoard.t),
+      columns: columns?.call(Listboard.t),
       transaction: transaction,
     );
   }
 
-  Future<List<ListBoard>> delete(
+  Future<List<Listboard>> delete(
     _i1.Session session,
-    List<ListBoard> rows, {
+    List<Listboard> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<ListBoard>(
+    return session.db.delete<Listboard>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<ListBoard> deleteRow(
+  Future<Listboard> deleteRow(
     _i1.Session session,
-    ListBoard row, {
+    Listboard row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<ListBoard>(
+    return session.db.deleteRow<Listboard>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<ListBoard>> deleteWhere(
+  Future<List<Listboard>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<ListBoardTable> where,
+    required _i1.WhereExpressionBuilder<ListboardTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<ListBoard>(
-      where: where(ListBoard.t),
+    return session.db.deleteWhere<Listboard>(
+      where: where(Listboard.t),
       transaction: transaction,
     );
   }
 
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<ListBoardTable>? where,
+    _i1.WhereExpressionBuilder<ListboardTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<ListBoard>(
-      where: where?.call(ListBoard.t),
+    return session.db.count<Listboard>(
+      where: where?.call(Listboard.t),
       limit: limit,
       transaction: transaction,
     );

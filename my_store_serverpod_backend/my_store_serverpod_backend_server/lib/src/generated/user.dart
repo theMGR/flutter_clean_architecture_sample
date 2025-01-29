@@ -14,27 +14,24 @@ import 'package:serverpod/serverpod.dart' as _i1;
 abstract class User implements _i1.TableRow, _i1.ProtocolSerialization {
   User._({
     this.id,
-    required this.name,
+    this.name,
     required this.email,
     required this.password,
-    required this.handle,
   });
 
   factory User({
     int? id,
-    required String name,
+    String? name,
     required String email,
     required String password,
-    required String handle,
   }) = _UserImpl;
 
   factory User.fromJson(Map<String, dynamic> jsonSerialization) {
     return User(
       id: jsonSerialization['id'] as int?,
-      name: jsonSerialization['name'] as String,
+      name: jsonSerialization['name'] as String?,
       email: jsonSerialization['email'] as String,
       password: jsonSerialization['password'] as String,
-      handle: jsonSerialization['handle'] as String,
     );
   }
 
@@ -45,13 +42,11 @@ abstract class User implements _i1.TableRow, _i1.ProtocolSerialization {
   @override
   int? id;
 
-  String name;
+  String? name;
 
   String email;
 
   String password;
-
-  String handle;
 
   @override
   _i1.Table get table => t;
@@ -61,16 +56,14 @@ abstract class User implements _i1.TableRow, _i1.ProtocolSerialization {
     String? name,
     String? email,
     String? password,
-    String? handle,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
-      'name': name,
+      if (name != null) 'name': name,
       'email': email,
       'password': password,
-      'handle': handle,
     };
   }
 
@@ -78,10 +71,9 @@ abstract class User implements _i1.TableRow, _i1.ProtocolSerialization {
   Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
-      'name': name,
+      if (name != null) 'name': name,
       'email': email,
       'password': password,
-      'handle': handle,
     };
   }
 
@@ -120,38 +112,34 @@ class _Undefined {}
 class _UserImpl extends User {
   _UserImpl({
     int? id,
-    required String name,
+    String? name,
     required String email,
     required String password,
-    required String handle,
   }) : super._(
           id: id,
           name: name,
           email: email,
           password: password,
-          handle: handle,
         );
 
   @override
   User copyWith({
     Object? id = _Undefined,
-    String? name,
+    Object? name = _Undefined,
     String? email,
     String? password,
-    String? handle,
   }) {
     return User(
       id: id is int? ? id : this.id,
-      name: name ?? this.name,
+      name: name is String? ? name : this.name,
       email: email ?? this.email,
       password: password ?? this.password,
-      handle: handle ?? this.handle,
     );
   }
 }
 
 class UserTable extends _i1.Table {
-  UserTable({super.tableRelation}) : super(tableName: 'user') {
+  UserTable({super.tableRelation}) : super(tableName: 'trellouser') {
     name = _i1.ColumnString(
       'name',
       this,
@@ -164,10 +152,6 @@ class UserTable extends _i1.Table {
       'password',
       this,
     );
-    handle = _i1.ColumnString(
-      'handle',
-      this,
-    );
   }
 
   late final _i1.ColumnString name;
@@ -176,15 +160,12 @@ class UserTable extends _i1.Table {
 
   late final _i1.ColumnString password;
 
-  late final _i1.ColumnString handle;
-
   @override
   List<_i1.Column> get columns => [
         id,
         name,
         email,
         password,
-        handle,
       ];
 }
 

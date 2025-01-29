@@ -1,4 +1,4 @@
-class: CheckList
+class: Checklist
 table: checklist
 fields:
   cardId: int, relation(parent=card)

@@ -1,6 +1,6 @@
 class: Attachment
 table: attachment
 fields:
-  userId: int, relation(parent=user)
+  userId: int, relation(parent=trellouser)
   cardId: int, relation(parent=card)
   attachment: String

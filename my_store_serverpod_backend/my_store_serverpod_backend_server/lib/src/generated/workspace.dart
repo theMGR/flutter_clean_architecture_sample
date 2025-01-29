@@ -17,7 +17,7 @@ abstract class Workspace implements _i1.TableRow, _i1.ProtocolSerialization {
     this.id,
     required this.userId,
     required this.name,
-    required this.handle,
+    required this.description,
     required this.visibility,
     this.members,
   });
@@ -26,7 +26,7 @@ abstract class Workspace implements _i1.TableRow, _i1.ProtocolSerialization {
     int? id,
     required int userId,
     required String name,
-    required String handle,
+    required String description,
     required String visibility,
     List<_i2.Member>? members,
   }) = _WorkspaceImpl;
@@ -36,7 +36,7 @@ abstract class Workspace implements _i1.TableRow, _i1.ProtocolSerialization {
       id: jsonSerialization['id'] as int?,
       userId: jsonSerialization['userId'] as int,
       name: jsonSerialization['name'] as String,
-      handle: jsonSerialization['handle'] as String,
+      description: jsonSerialization['description'] as String,
       visibility: jsonSerialization['visibility'] as String,
       members: (jsonSerialization['members'] as List?)
           ?.map((e) => _i2.Member.fromJson((e as Map<String, dynamic>)))
@@ -55,7 +55,7 @@ abstract class Workspace implements _i1.TableRow, _i1.ProtocolSerialization {
 
   String name;
 
-  String handle;
+  String description;
 
   String visibility;
 
@@ -68,7 +68,7 @@ abstract class Workspace implements _i1.TableRow, _i1.ProtocolSerialization {
     int? id,
     int? userId,
     String? name,
-    String? handle,
+    String? description,
     String? visibility,
     List<_i2.Member>? members,
   });
@@ -78,7 +78,7 @@ abstract class Workspace implements _i1.TableRow, _i1.ProtocolSerialization {
       if (id != null) 'id': id,
       'userId': userId,
       'name': name,
-      'handle': handle,
+      'description': description,
       'visibility': visibility,
       if (members != null)
         'members': members?.toJson(valueToJson: (v) => v.toJson()),
@@ -91,7 +91,7 @@ abstract class Workspace implements _i1.TableRow, _i1.ProtocolSerialization {
       if (id != null) 'id': id,
       'userId': userId,
       'name': name,
-      'handle': handle,
+      'description': description,
       'visibility': visibility,
       if (members != null)
         'members': members?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
@@ -135,14 +135,14 @@ class _WorkspaceImpl extends Workspace {
     int? id,
     required int userId,
     required String name,
-    required String handle,
+    required String description,
     required String visibility,
     List<_i2.Member>? members,
   }) : super._(
           id: id,
           userId: userId,
           name: name,
-          handle: handle,
+          description: description,
           visibility: visibility,
           members: members,
         );
@@ -152,7 +152,7 @@ class _WorkspaceImpl extends Workspace {
     Object? id = _Undefined,
     int? userId,
     String? name,
-    String? handle,
+    String? description,
     String? visibility,
     Object? members = _Undefined,
   }) {
@@ -160,7 +160,7 @@ class _WorkspaceImpl extends Workspace {
       id: id is int? ? id : this.id,
       userId: userId ?? this.userId,
       name: name ?? this.name,
-      handle: handle ?? this.handle,
+      description: description ?? this.description,
       visibility: visibility ?? this.visibility,
       members: members is List<_i2.Member>?
           ? members
@@ -179,8 +179,8 @@ class WorkspaceTable extends _i1.Table {
       'name',
       this,
     );
-    handle = _i1.ColumnString(
-      'handle',
+    description = _i1.ColumnString(
+      'description',
       this,
     );
     visibility = _i1.ColumnString(
@@ -193,7 +193,7 @@ class WorkspaceTable extends _i1.Table {
 
   late final _i1.ColumnString name;
 
-  late final _i1.ColumnString handle;
+  late final _i1.ColumnString description;
 
   late final _i1.ColumnString visibility;
 
@@ -202,7 +202,7 @@ class WorkspaceTable extends _i1.Table {
         id,
         userId,
         name,
-        handle,
+        description,
         visibility,
       ];
 }

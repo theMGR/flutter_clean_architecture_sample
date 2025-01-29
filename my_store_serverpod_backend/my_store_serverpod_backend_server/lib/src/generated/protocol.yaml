@@ -1,11 +1,52 @@
+activity:
+  - createActivity:
+  - getActivities:
+attachment:
+  - addAttachment:
+  - getUploadDescription:
+  - verifyUpload:
+board:
+  - createBoard:
+  - updateBoard:
+  - deleteBoard:
+  - getWorkspaceForBoard:
+  - getAllBoards:
+card:
+  - createCard:
+  - updateCard:
+checklist:
+  - createChecklist:
+  - updateChecklist:
+  - deleteChecklistItem:
+  - getChecklists:
+  - deleteChecklist:
+comment:
+  - createComment:
+  - deleteComment:
 example:
   - hello:
+listboard:
+  - getListsByBoard:
+  - createList:
+member:
+  - addMember:
+  - getMembersByWorkspace:
+  - getInformationOfMembers:
+  - deleteMember:
 mobileAuthEndPoint:
   - addMobileAuth:
   - getMobileAuthByPhone:
   - updateToken:
   - verifyOTP:
   - generateOTP:
-userEndPoints:
-  - addUser:
-  - getAllUsers:
+user:
+  - createUser:
+  - getUserById:
+  - checkUserExists:
+workspace:
+  - createWorkspace:
+  - getWorkspacesByUser:
+  - getWorkspaceById:
+  - getBoardsByWorkspace:
+  - updateWorkspace:
+  - deleteWorkspace:

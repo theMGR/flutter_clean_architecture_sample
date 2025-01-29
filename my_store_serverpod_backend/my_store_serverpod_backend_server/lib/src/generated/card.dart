@@ -11,8 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class Card implements _i1.TableRow, _i1.ProtocolSerialization {
-  Card._({
+abstract class Cardlist implements _i1.TableRow, _i1.ProtocolSerialization {
+  Cardlist._({
     this.id,
     required this.listId,
     required this.userId,
@@ -26,7 +26,7 @@ abstract class Card implements _i1.TableRow, _i1.ProtocolSerialization {
     this.comments,
   });
 
-  factory Card({
+  factory Cardlist({
     int? id,
     required int listId,
     required int userId,
@@ -38,10 +38,10 @@ abstract class Card implements _i1.TableRow, _i1.ProtocolSerialization {
     bool? archived,
     bool? checklist,
     bool? comments,
-  }) = _CardImpl;
+  }) = _CardlistImpl;
 
-  factory Card.fromJson(Map<String, dynamic> jsonSerialization) {
-    return Card(
+  factory Cardlist.fromJson(Map<String, dynamic> jsonSerialization) {
+    return Cardlist(
       id: jsonSerialization['id'] as int?,
       listId: jsonSerialization['listId'] as int,
       userId: jsonSerialization['userId'] as int,
@@ -60,9 +60,9 @@ abstract class Card implements _i1.TableRow, _i1.ProtocolSerialization {
     );
   }
 
-  static final t = CardTable();
+  static final t = CardlistTable();
 
-  static const db = CardRepository._();
+  static const db = CardlistRepository._();
 
   @override
   int? id;
@@ -90,7 +90,7 @@ abstract class Card implements _i1.TableRow, _i1.ProtocolSerialization {
   @override
   _i1.Table get table => t;
 
-  Card copyWith({
+  Cardlist copyWith({
     int? id,
     int? listId,
     int? userId,
@@ -137,26 +137,26 @@ abstract class Card implements _i1.TableRow, _i1.ProtocolSerialization {
     };
   }
 
-  static CardInclude include() {
-    return CardInclude._();
+  static CardlistInclude include() {
+    return CardlistInclude._();
   }
 
-  static CardIncludeList includeList({
-    _i1.WhereExpressionBuilder<CardTable>? where,
+  static CardlistIncludeList includeList({
+    _i1.WhereExpressionBuilder<CardlistTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<CardTable>? orderBy,
+    _i1.OrderByBuilder<CardlistTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CardTable>? orderByList,
-    CardInclude? include,
+    _i1.OrderByListBuilder<CardlistTable>? orderByList,
+    CardlistInclude? include,
   }) {
-    return CardIncludeList._(
+    return CardlistIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(Card.t),
+      orderBy: orderBy?.call(Cardlist.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(Card.t),
+      orderByList: orderByList?.call(Cardlist.t),
       include: include,
     );
   }
@@ -169,8 +169,8 @@ abstract class Card implements _i1.TableRow, _i1.ProtocolSerialization {
 
 class _Undefined {}
 
-class _CardImpl extends Card {
-  _CardImpl({
+class _CardlistImpl extends Cardlist {
+  _CardlistImpl({
     int? id,
     required int listId,
     required int userId,
@@ -197,7 +197,7 @@ class _CardImpl extends Card {
         );
 
   @override
-  Card copyWith({
+  Cardlist copyWith({
     Object? id = _Undefined,
     int? listId,
     int? userId,
@@ -210,7 +210,7 @@ class _CardImpl extends Card {
     Object? checklist = _Undefined,
     Object? comments = _Undefined,
   }) {
-    return Card(
+    return Cardlist(
       id: id is int? ? id : this.id,
       listId: listId ?? this.listId,
       userId: userId ?? this.userId,
@@ -226,8 +226,8 @@ class _CardImpl extends Card {
   }
 }
 
-class CardTable extends _i1.Table {
-  CardTable({super.tableRelation}) : super(tableName: 'card') {
+class CardlistTable extends _i1.Table {
+  CardlistTable({super.tableRelation}) : super(tableName: 'card') {
     listId = _i1.ColumnInt(
       'listId',
       this,
@@ -306,19 +306,19 @@ class CardTable extends _i1.Table {
       ];
 }
 
-class CardInclude extends _i1.IncludeObject {
-  CardInclude._();
+class CardlistInclude extends _i1.IncludeObject {
+  CardlistInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Card.t;
+  _i1.Table get table => Cardlist.t;
 }
 
-class CardIncludeList extends _i1.IncludeList {
-  CardIncludeList._({
-    _i1.WhereExpressionBuilder<CardTable>? where,
+class CardlistIncludeList extends _i1.IncludeList {
+  CardlistIncludeList._({
+    _i1.WhereExpressionBuilder<CardlistTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -326,33 +326,33 @@ class CardIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(Card.t);
+    super.where = where?.call(Cardlist.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Card.t;
+  _i1.Table get table => Cardlist.t;
 }
 
-class CardRepository {
-  const CardRepository._();
+class CardlistRepository {
+  const CardlistRepository._();
 
-  Future<List<Card>> find(
+  Future<List<Cardlist>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CardTable>? where,
+    _i1.WhereExpressionBuilder<CardlistTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<CardTable>? orderBy,
+    _i1.OrderByBuilder<CardlistTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CardTable>? orderByList,
+    _i1.OrderByListBuilder<CardlistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Card>(
-      where: where?.call(Card.t),
-      orderBy: orderBy?.call(Card.t),
-      orderByList: orderByList?.call(Card.t),
+    return session.db.find<Cardlist>(
+      where: where?.call(Cardlist.t),
+      orderBy: orderBy?.call(Cardlist.t),
+      orderByList: orderByList?.call(Cardlist.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -360,125 +360,125 @@ class CardRepository {
     );
   }
 
-  Future<Card?> findFirstRow(
+  Future<Cardlist?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CardTable>? where,
+    _i1.WhereExpressionBuilder<CardlistTable>? where,
     int? offset,
-    _i1.OrderByBuilder<CardTable>? orderBy,
+    _i1.OrderByBuilder<CardlistTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CardTable>? orderByList,
+    _i1.OrderByListBuilder<CardlistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<Card>(
-      where: where?.call(Card.t),
-      orderBy: orderBy?.call(Card.t),
-      orderByList: orderByList?.call(Card.t),
+    return session.db.findFirstRow<Cardlist>(
+      where: where?.call(Cardlist.t),
+      orderBy: orderBy?.call(Cardlist.t),
+      orderByList: orderByList?.call(Cardlist.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  Future<Card?> findById(
+  Future<Cardlist?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<Card>(
+    return session.db.findById<Cardlist>(
       id,
       transaction: transaction,
     );
   }
 
-  Future<List<Card>> insert(
+  Future<List<Cardlist>> insert(
     _i1.Session session,
-    List<Card> rows, {
+    List<Cardlist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Card>(
+    return session.db.insert<Cardlist>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<Card> insertRow(
+  Future<Cardlist> insertRow(
     _i1.Session session,
-    Card row, {
+    Cardlist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Card>(
+    return session.db.insertRow<Cardlist>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<Card>> update(
+  Future<List<Cardlist>> update(
     _i1.Session session,
-    List<Card> rows, {
-    _i1.ColumnSelections<CardTable>? columns,
+    List<Cardlist> rows, {
+    _i1.ColumnSelections<CardlistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Card>(
+    return session.db.update<Cardlist>(
       rows,
-      columns: columns?.call(Card.t),
+      columns: columns?.call(Cardlist.t),
       transaction: transaction,
     );
   }
 
-  Future<Card> updateRow(
+  Future<Cardlist> updateRow(
     _i1.Session session,
-    Card row, {
-    _i1.ColumnSelections<CardTable>? columns,
+    Cardlist row, {
+    _i1.ColumnSelections<CardlistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Card>(
+    return session.db.updateRow<Cardlist>(
       row,
-      columns: columns?.call(Card.t),
+      columns: columns?.call(Cardlist.t),
       transaction: transaction,
     );
   }
 
-  Future<List<Card>> delete(
+  Future<List<Cardlist>> delete(
     _i1.Session session,
-    List<Card> rows, {
+    List<Cardlist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Card>(
+    return session.db.delete<Cardlist>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<Card> deleteRow(
+  Future<Cardlist> deleteRow(
     _i1.Session session,
-    Card row, {
+    Cardlist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Card>(
+    return session.db.deleteRow<Cardlist>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<Card>> deleteWhere(
+  Future<List<Cardlist>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<CardTable> where,
+    required _i1.WhereExpressionBuilder<CardlistTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Card>(
-      where: where(Card.t),
+    return session.db.deleteWhere<Cardlist>(
+      where: where(Cardlist.t),
       transaction: transaction,
     );
   }
 
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CardTable>? where,
+    _i1.WhereExpressionBuilder<CardlistTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Card>(
-      where: where?.call(Card.t),
+    return session.db.count<Cardlist>(
+      where: where?.call(Cardlist.t),
       limit: limit,
       transaction: transaction,
     );

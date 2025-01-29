@@ -14,18 +14,18 @@ import 'package:serverpod/serverpod.dart' as _i1;
 abstract class Activity implements _i1.TableRow, _i1.ProtocolSerialization {
   Activity._({
     this.id,
-    required this.boardId,
+    this.boardId,
     required this.userId,
-    required this.cardId,
+    this.cardId,
     required this.description,
     required this.dateCreated,
   });
 
   factory Activity({
     int? id,
-    required int boardId,
+    int? boardId,
     required int userId,
-    required int cardId,
+    int? cardId,
     required String description,
     required DateTime dateCreated,
   }) = _ActivityImpl;
@@ -33,9 +33,9 @@ abstract class Activity implements _i1.TableRow, _i1.ProtocolSerialization {
   factory Activity.fromJson(Map<String, dynamic> jsonSerialization) {
     return Activity(
       id: jsonSerialization['id'] as int?,
-      boardId: jsonSerialization['boardId'] as int,
+      boardId: jsonSerialization['boardId'] as int?,
       userId: jsonSerialization['userId'] as int,
-      cardId: jsonSerialization['cardId'] as int,
+      cardId: jsonSerialization['cardId'] as int?,
       description: jsonSerialization['description'] as String,
       dateCreated:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['dateCreated']),
@@ -49,11 +49,11 @@ abstract class Activity implements _i1.TableRow, _i1.ProtocolSerialization {
   @override
   int? id;
 
-  int boardId;
+  int? boardId;
 
   int userId;
 
-  int cardId;
+  int? cardId;
 
   String description;
 
@@ -74,9 +74,9 @@ abstract class Activity implements _i1.TableRow, _i1.ProtocolSerialization {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
-      'boardId': boardId,
+      if (boardId != null) 'boardId': boardId,
       'userId': userId,
-      'cardId': cardId,
+      if (cardId != null) 'cardId': cardId,
       'description': description,
       'dateCreated': dateCreated.toJson(),
     };
@@ -86,9 +86,9 @@ abstract class Activity implements _i1.TableRow, _i1.ProtocolSerialization {
   Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
-      'boardId': boardId,
+      if (boardId != null) 'boardId': boardId,
       'userId': userId,
-      'cardId': cardId,
+      if (cardId != null) 'cardId': cardId,
       'description': description,
       'dateCreated': dateCreated.toJson(),
     };
@@ -129,9 +129,9 @@ class _Undefined {}
 class _ActivityImpl extends Activity {
   _ActivityImpl({
     int? id,
-    required int boardId,
+    int? boardId,
     required int userId,
-    required int cardId,
+    int? cardId,
     required String description,
     required DateTime dateCreated,
   }) : super._(
@@ -146,17 +146,17 @@ class _ActivityImpl extends Activity {
   @override
   Activity copyWith({
     Object? id = _Undefined,
-    int? boardId,
+    Object? boardId = _Undefined,
     int? userId,
-    int? cardId,
+    Object? cardId = _Undefined,
     String? description,
     DateTime? dateCreated,
   }) {
     return Activity(
       id: id is int? ? id : this.id,
-      boardId: boardId ?? this.boardId,
+      boardId: boardId is int? ? boardId : this.boardId,
       userId: userId ?? this.userId,
-      cardId: cardId ?? this.cardId,
+      cardId: cardId is int? ? cardId : this.cardId,
       description: description ?? this.description,
       dateCreated: dateCreated ?? this.dateCreated,
     );

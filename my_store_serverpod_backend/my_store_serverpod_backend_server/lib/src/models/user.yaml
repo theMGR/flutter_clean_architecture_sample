@@ -1,7 +1,6 @@
 class: User
-table: user
+table: trellouser
 fields:
-  name: String
+  name: String?
   email: String
   password: String
-  handle: String

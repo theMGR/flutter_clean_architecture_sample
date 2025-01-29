@@ -22,8 +22,20 @@ import 'member.dart' as _i10;
 import 'mobile_auth_model.dart' as _i11;
 import 'user.dart' as _i12;
 import 'workspace.dart' as _i13;
-import 'package:my_store_serverpod_backend_client/src/protocol/user.dart'
+import 'package:my_store_serverpod_backend_client/src/protocol/activity.dart'
     as _i14;
+import 'package:my_store_serverpod_backend_client/src/protocol/board.dart'
+    as _i15;
+import 'package:my_store_serverpod_backend_client/src/protocol/checklist.dart'
+    as _i16;
+import 'package:my_store_serverpod_backend_client/src/protocol/listboard.dart'
+    as _i17;
+import 'package:my_store_serverpod_backend_client/src/protocol/member.dart'
+    as _i18;
+import 'package:my_store_serverpod_backend_client/src/protocol/user.dart'
+    as _i19;
+import 'package:my_store_serverpod_backend_client/src/protocol/workspace.dart'
+    as _i20;
 export 'activity.dart';
 export 'attachment.dart';
 export 'board.dart';
@@ -60,11 +72,11 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i4.Board) {
       return _i4.Board.fromJson(data) as T;
     }
-    if (t == _i5.Card) {
-      return _i5.Card.fromJson(data) as T;
+    if (t == _i5.Cardlist) {
+      return _i5.Cardlist.fromJson(data) as T;
     }
-    if (t == _i6.CheckList) {
-      return _i6.CheckList.fromJson(data) as T;
+    if (t == _i6.Checklist) {
+      return _i6.Checklist.fromJson(data) as T;
     }
     if (t == _i7.Comment) {
       return _i7.Comment.fromJson(data) as T;
@@ -72,8 +84,8 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i8.Example) {
       return _i8.Example.fromJson(data) as T;
     }
-    if (t == _i9.ListBoard) {
-      return _i9.ListBoard.fromJson(data) as T;
+    if (t == _i9.Listboard) {
+      return _i9.Listboard.fromJson(data) as T;
     }
     if (t == _i10.Member) {
       return _i10.Member.fromJson(data) as T;
@@ -96,11 +108,11 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i4.Board?>()) {
       return (data != null ? _i4.Board.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i5.Card?>()) {
-      return (data != null ? _i5.Card.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i5.Cardlist?>()) {
+      return (data != null ? _i5.Cardlist.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i6.CheckList?>()) {
-      return (data != null ? _i6.CheckList.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i6.Checklist?>()) {
+      return (data != null ? _i6.Checklist.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i7.Comment?>()) {
       return (data != null ? _i7.Comment.fromJson(data) : null) as T;
@@ -108,8 +120,8 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i8.Example?>()) {
       return (data != null ? _i8.Example.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i9.ListBoard?>()) {
-      return (data != null ? _i9.ListBoard.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i9.Listboard?>()) {
+      return (data != null ? _i9.Listboard.fromJson(data) : null) as T;
     }
     if (t == _i1.getType<_i10.Member?>()) {
       return (data != null ? _i10.Member.fromJson(data) : null) as T;
@@ -123,9 +135,9 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i13.Workspace?>()) {
       return (data != null ? _i13.Workspace.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<List<_i5.Card>?>()) {
+    if (t == _i1.getType<List<_i5.Cardlist>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i5.Card>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i5.Cardlist>(e)).toList()
           : null) as dynamic;
     }
     if (t == _i1.getType<List<_i10.Member>?>()) {
@@ -133,8 +145,32 @@ class Protocol extends _i1.SerializationManager {
           ? (data as List).map((e) => deserialize<_i10.Member>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i14.User>) {
-      return (data as List).map((e) => deserialize<_i14.User>(e)).toList()
+    if (t == List<_i14.Activity>) {
+      return (data as List).map((e) => deserialize<_i14.Activity>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i15.Board>) {
+      return (data as List).map((e) => deserialize<_i15.Board>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i16.Checklist>) {
+      return (data as List).map((e) => deserialize<_i16.Checklist>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i17.Listboard>) {
+      return (data as List).map((e) => deserialize<_i17.Listboard>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i18.Member>) {
+      return (data as List).map((e) => deserialize<_i18.Member>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i19.User>) {
+      return (data as List).map((e) => deserialize<_i19.User>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i20.Workspace>) {
+      return (data as List).map((e) => deserialize<_i20.Workspace>(e)).toList()
           as dynamic;
     }
     return super.deserialize<T>(data, t);
@@ -153,11 +189,11 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i4.Board) {
       return 'Board';
     }
-    if (data is _i5.Card) {
-      return 'Card';
+    if (data is _i5.Cardlist) {
+      return 'Cardlist';
     }
-    if (data is _i6.CheckList) {
-      return 'CheckList';
+    if (data is _i6.Checklist) {
+      return 'Checklist';
     }
     if (data is _i7.Comment) {
       return 'Comment';
@@ -165,8 +201,8 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i8.Example) {
       return 'Example';
     }
-    if (data is _i9.ListBoard) {
-      return 'ListBoard';
+    if (data is _i9.Listboard) {
+      return 'Listboard';
     }
     if (data is _i10.Member) {
       return 'Member';
@@ -198,11 +234,11 @@ class Protocol extends _i1.SerializationManager {
     if (dataClassName == 'Board') {
       return deserialize<_i4.Board>(data['data']);
     }
-    if (dataClassName == 'Card') {
-      return deserialize<_i5.Card>(data['data']);
+    if (dataClassName == 'Cardlist') {
+      return deserialize<_i5.Cardlist>(data['data']);
     }
-    if (dataClassName == 'CheckList') {
-      return deserialize<_i6.CheckList>(data['data']);
+    if (dataClassName == 'Checklist') {
+      return deserialize<_i6.Checklist>(data['data']);
     }
     if (dataClassName == 'Comment') {
       return deserialize<_i7.Comment>(data['data']);
@@ -210,8 +246,8 @@ class Protocol extends _i1.SerializationManager {
     if (dataClassName == 'Example') {
       return deserialize<_i8.Example>(data['data']);
     }
-    if (dataClassName == 'ListBoard') {
-      return deserialize<_i9.ListBoard>(data['data']);
+    if (dataClassName == 'Listboard') {
+      return deserialize<_i9.Listboard>(data['data']);
     }
     if (dataClassName == 'Member') {
       return deserialize<_i10.Member>(data['data']);

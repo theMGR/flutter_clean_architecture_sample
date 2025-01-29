@@ -19,7 +19,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
     required this.name,
     this.description,
     required this.visibility,
-    this.background,
+    required this.background,
     this.starred,
     this.enableCover,
     this.watch,
@@ -40,7 +40,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
     required String name,
     String? description,
     required String visibility,
-    String? background,
+    required String background,
     bool? starred,
     bool? enableCover,
     bool? watch,
@@ -48,7 +48,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
     String? label,
     String? emailAddress,
     int? commenting,
-    bool? memberType,
+    int? memberType,
     bool? pinned,
     bool? selfJoin,
     bool? close,
@@ -62,7 +62,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String?,
       visibility: jsonSerialization['visibility'] as String,
-      background: jsonSerialization['background'] as String?,
+      background: jsonSerialization['background'] as String,
       starred: jsonSerialization['starred'] as bool?,
       enableCover: jsonSerialization['enableCover'] as bool?,
       watch: jsonSerialization['watch'] as bool?,
@@ -70,7 +70,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
       label: jsonSerialization['label'] as String?,
       emailAddress: jsonSerialization['emailAddress'] as String?,
       commenting: jsonSerialization['commenting'] as int?,
-      memberType: jsonSerialization['memberType'] as bool?,
+      memberType: jsonSerialization['memberType'] as int?,
       pinned: jsonSerialization['pinned'] as bool?,
       selfJoin: jsonSerialization['selfJoin'] as bool?,
       close: jsonSerialization['close'] as bool?,
@@ -94,7 +94,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
 
   String visibility;
 
-  String? background;
+  String background;
 
   bool? starred;
 
@@ -110,7 +110,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
 
   int? commenting;
 
-  bool? memberType;
+  int? memberType;
 
   bool? pinned;
 
@@ -136,7 +136,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
     String? label,
     String? emailAddress,
     int? commenting,
-    bool? memberType,
+    int? memberType,
     bool? pinned,
     bool? selfJoin,
     bool? close,
@@ -150,7 +150,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
       'name': name,
       if (description != null) 'description': description,
       'visibility': visibility,
-      if (background != null) 'background': background,
+      'background': background,
       if (starred != null) 'starred': starred,
       if (enableCover != null) 'enableCover': enableCover,
       if (watch != null) 'watch': watch,
@@ -174,7 +174,7 @@ abstract class Board implements _i1.TableRow, _i1.ProtocolSerialization {
       'name': name,
       if (description != null) 'description': description,
       'visibility': visibility,
-      if (background != null) 'background': background,
+      'background': background,
       if (starred != null) 'starred': starred,
       if (enableCover != null) 'enableCover': enableCover,
       if (watch != null) 'watch': watch,
@@ -229,7 +229,7 @@ class _BoardImpl extends Board {
     required String name,
     String? description,
     required String visibility,
-    String? background,
+    required String background,
     bool? starred,
     bool? enableCover,
     bool? watch,
@@ -237,7 +237,7 @@ class _BoardImpl extends Board {
     String? label,
     String? emailAddress,
     int? commenting,
-    bool? memberType,
+    int? memberType,
     bool? pinned,
     bool? selfJoin,
     bool? close,
@@ -270,7 +270,7 @@ class _BoardImpl extends Board {
     String? name,
     Object? description = _Undefined,
     String? visibility,
-    Object? background = _Undefined,
+    String? background,
     Object? starred = _Undefined,
     Object? enableCover = _Undefined,
     Object? watch = _Undefined,
@@ -290,7 +290,7 @@ class _BoardImpl extends Board {
       name: name ?? this.name,
       description: description is String? ? description : this.description,
       visibility: visibility ?? this.visibility,
-      background: background is String? ? background : this.background,
+      background: background ?? this.background,
       starred: starred is bool? ? starred : this.starred,
       enableCover: enableCover is bool? ? enableCover : this.enableCover,
       watch: watch is bool? ? watch : this.watch,
@@ -299,7 +299,7 @@ class _BoardImpl extends Board {
       label: label is String? ? label : this.label,
       emailAddress: emailAddress is String? ? emailAddress : this.emailAddress,
       commenting: commenting is int? ? commenting : this.commenting,
-      memberType: memberType is bool? ? memberType : this.memberType,
+      memberType: memberType is int? ? memberType : this.memberType,
       pinned: pinned is bool? ? pinned : this.pinned,
       selfJoin: selfJoin is bool? ? selfJoin : this.selfJoin,
       close: close is bool? ? close : this.close,
@@ -361,7 +361,7 @@ class BoardTable extends _i1.Table {
       'commenting',
       this,
     );
-    memberType = _i1.ColumnBool(
+    memberType = _i1.ColumnInt(
       'memberType',
       this,
     );
@@ -405,7 +405,7 @@ class BoardTable extends _i1.Table {
 
   late final _i1.ColumnInt commenting;
 
-  late final _i1.ColumnBool memberType;
+  late final _i1.ColumnInt memberType;
 
   late final _i1.ColumnBool pinned;
 

@@ -1,8 +1,8 @@
 class: Workspace
 table: workspace
 fields:
-  userId: int, relation(parent=user)
+  userId: int, relation(parent=trellouser)
   name: String
-  handle: String
+  description: String
   visibility: String
   members: List<Member>?, !persist

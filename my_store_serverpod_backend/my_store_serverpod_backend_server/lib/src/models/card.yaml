@@ -1,8 +1,8 @@
-class: Card
+class: Cardlist
 table: card
 fields:
   listId: int, relation(parent=listboard)
-  userId: int, relation(parent=user)
+  userId: int, relation(parent=trellouser)
   name: String
   description: String?
   startDate: DateTime?

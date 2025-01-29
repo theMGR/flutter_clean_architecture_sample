@@ -1,8 +1,8 @@
 class: Activity
 table: activity
 fields:
-  boardId: int, relation(parent=board)
-  userId: int, relation(parent=user)
-  cardId: int, relation(parent=card)
+  boardId: int?, relation(parent=board)
+  userId: int, relation(parent=trellouser)
+  cardId: int?, relation(parent=card)
   description: String
   dateCreated: DateTime

@@ -2,5 +2,5 @@ class: Comment
 table: comment
 fields:
   cardId: int, relation(parent=card)
-  userId: int, relation(parent=user)
+  userId: int, relation(parent=trellouser)
   description: String

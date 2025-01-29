@@ -31,7 +31,7 @@ webServer:
 database:
   host: localhost
   port: 8090
-  name: my_store_serverpod_backend
+  name: my_store_serverpod_backend # db name
   user: postgres
 
 # This is the setup for Redis.

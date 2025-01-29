@@ -1,7 +1,7 @@
 class: Member
-table: table
+table: member
 fields:
   workspaceId: int, relation(parent=workspace)
-  userId: int, relation(parent=user)
+  userId: int, relation(parent=trellouser)
   name: String
   role: String

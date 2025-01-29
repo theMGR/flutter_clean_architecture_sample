@@ -11,23 +11,23 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class CheckList implements _i1.TableRow, _i1.ProtocolSerialization {
-  CheckList._({
+abstract class Checklist implements _i1.TableRow, _i1.ProtocolSerialization {
+  Checklist._({
     this.id,
     required this.cardId,
     required this.name,
     required this.status,
   });
 
-  factory CheckList({
+  factory Checklist({
     int? id,
     required int cardId,
     required String name,
     required bool status,
-  }) = _CheckListImpl;
+  }) = _ChecklistImpl;
 
-  factory CheckList.fromJson(Map<String, dynamic> jsonSerialization) {
-    return CheckList(
+  factory Checklist.fromJson(Map<String, dynamic> jsonSerialization) {
+    return Checklist(
       id: jsonSerialization['id'] as int?,
       cardId: jsonSerialization['cardId'] as int,
       name: jsonSerialization['name'] as String,
@@ -35,9 +35,9 @@ abstract class CheckList implements _i1.TableRow, _i1.ProtocolSerialization {
     );
   }
 
-  static final t = CheckListTable();
+  static final t = ChecklistTable();
 
-  static const db = CheckListRepository._();
+  static const db = ChecklistRepository._();
 
   @override
   int? id;
@@ -51,7 +51,7 @@ abstract class CheckList implements _i1.TableRow, _i1.ProtocolSerialization {
   @override
   _i1.Table get table => t;
 
-  CheckList copyWith({
+  Checklist copyWith({
     int? id,
     int? cardId,
     String? name,
@@ -77,26 +77,26 @@ abstract class CheckList implements _i1.TableRow, _i1.ProtocolSerialization {
     };
   }
 
-  static CheckListInclude include() {
-    return CheckListInclude._();
+  static ChecklistInclude include() {
+    return ChecklistInclude._();
   }
 
-  static CheckListIncludeList includeList({
-    _i1.WhereExpressionBuilder<CheckListTable>? where,
+  static ChecklistIncludeList includeList({
+    _i1.WhereExpressionBuilder<ChecklistTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<CheckListTable>? orderBy,
+    _i1.OrderByBuilder<ChecklistTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CheckListTable>? orderByList,
-    CheckListInclude? include,
+    _i1.OrderByListBuilder<ChecklistTable>? orderByList,
+    ChecklistInclude? include,
   }) {
-    return CheckListIncludeList._(
+    return ChecklistIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(CheckList.t),
+      orderBy: orderBy?.call(Checklist.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(CheckList.t),
+      orderByList: orderByList?.call(Checklist.t),
       include: include,
     );
   }
@@ -109,8 +109,8 @@ abstract class CheckList implements _i1.TableRow, _i1.ProtocolSerialization {
 
 class _Undefined {}
 
-class _CheckListImpl extends CheckList {
-  _CheckListImpl({
+class _ChecklistImpl extends Checklist {
+  _ChecklistImpl({
     int? id,
     required int cardId,
     required String name,
@@ -123,13 +123,13 @@ class _CheckListImpl extends CheckList {
         );
 
   @override
-  CheckList copyWith({
+  Checklist copyWith({
     Object? id = _Undefined,
     int? cardId,
     String? name,
     bool? status,
   }) {
-    return CheckList(
+    return Checklist(
       id: id is int? ? id : this.id,
       cardId: cardId ?? this.cardId,
       name: name ?? this.name,
@@ -138,8 +138,8 @@ class _CheckListImpl extends CheckList {
   }
 }
 
-class CheckListTable extends _i1.Table {
-  CheckListTable({super.tableRelation}) : super(tableName: 'checklist') {
+class ChecklistTable extends _i1.Table {
+  ChecklistTable({super.tableRelation}) : super(tableName: 'checklist') {
     cardId = _i1.ColumnInt(
       'cardId',
       this,
@@ -169,19 +169,19 @@ class CheckListTable extends _i1.Table {
       ];
 }
 
-class CheckListInclude extends _i1.IncludeObject {
-  CheckListInclude._();
+class ChecklistInclude extends _i1.IncludeObject {
+  ChecklistInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => CheckList.t;
+  _i1.Table get table => Checklist.t;
 }
 
-class CheckListIncludeList extends _i1.IncludeList {
-  CheckListIncludeList._({
-    _i1.WhereExpressionBuilder<CheckListTable>? where,
+class ChecklistIncludeList extends _i1.IncludeList {
+  ChecklistIncludeList._({
+    _i1.WhereExpressionBuilder<ChecklistTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -189,33 +189,33 @@ class CheckListIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(CheckList.t);
+    super.where = where?.call(Checklist.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => CheckList.t;
+  _i1.Table get table => Checklist.t;
 }
 
-class CheckListRepository {
-  const CheckListRepository._();
+class ChecklistRepository {
+  const ChecklistRepository._();
 
-  Future<List<CheckList>> find(
+  Future<List<Checklist>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CheckListTable>? where,
+    _i1.WhereExpressionBuilder<ChecklistTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<CheckListTable>? orderBy,
+    _i1.OrderByBuilder<ChecklistTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CheckListTable>? orderByList,
+    _i1.OrderByListBuilder<ChecklistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<CheckList>(
-      where: where?.call(CheckList.t),
-      orderBy: orderBy?.call(CheckList.t),
-      orderByList: orderByList?.call(CheckList.t),
+    return session.db.find<Checklist>(
+      where: where?.call(Checklist.t),
+      orderBy: orderBy?.call(Checklist.t),
+      orderByList: orderByList?.call(Checklist.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -223,125 +223,125 @@ class CheckListRepository {
     );
   }
 
-  Future<CheckList?> findFirstRow(
+  Future<Checklist?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CheckListTable>? where,
+    _i1.WhereExpressionBuilder<ChecklistTable>? where,
     int? offset,
-    _i1.OrderByBuilder<CheckListTable>? orderBy,
+    _i1.OrderByBuilder<ChecklistTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CheckListTable>? orderByList,
+    _i1.OrderByListBuilder<ChecklistTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<CheckList>(
-      where: where?.call(CheckList.t),
-      orderBy: orderBy?.call(CheckList.t),
-      orderByList: orderByList?.call(CheckList.t),
+    return session.db.findFirstRow<Checklist>(
+      where: where?.call(Checklist.t),
+      orderBy: orderBy?.call(Checklist.t),
+      orderByList: orderByList?.call(Checklist.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  Future<CheckList?> findById(
+  Future<Checklist?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<CheckList>(
+    return session.db.findById<Checklist>(
       id,
       transaction: transaction,
     );
   }
 
-  Future<List<CheckList>> insert(
+  Future<List<Checklist>> insert(
     _i1.Session session,
-    List<CheckList> rows, {
+    List<Checklist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<CheckList>(
+    return session.db.insert<Checklist>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<CheckList> insertRow(
+  Future<Checklist> insertRow(
     _i1.Session session,
-    CheckList row, {
+    Checklist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<CheckList>(
+    return session.db.insertRow<Checklist>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<CheckList>> update(
+  Future<List<Checklist>> update(
     _i1.Session session,
-    List<CheckList> rows, {
-    _i1.ColumnSelections<CheckListTable>? columns,
+    List<Checklist> rows, {
+    _i1.ColumnSelections<ChecklistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<CheckList>(
+    return session.db.update<Checklist>(
       rows,
-      columns: columns?.call(CheckList.t),
+      columns: columns?.call(Checklist.t),
       transaction: transaction,
     );
   }
 
-  Future<CheckList> updateRow(
+  Future<Checklist> updateRow(
     _i1.Session session,
-    CheckList row, {
-    _i1.ColumnSelections<CheckListTable>? columns,
+    Checklist row, {
+    _i1.ColumnSelections<ChecklistTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<CheckList>(
+    return session.db.updateRow<Checklist>(
       row,
-      columns: columns?.call(CheckList.t),
+      columns: columns?.call(Checklist.t),
       transaction: transaction,
     );
   }
 
-  Future<List<CheckList>> delete(
+  Future<List<Checklist>> delete(
     _i1.Session session,
-    List<CheckList> rows, {
+    List<Checklist> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<CheckList>(
+    return session.db.delete<Checklist>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<CheckList> deleteRow(
+  Future<Checklist> deleteRow(
     _i1.Session session,
-    CheckList row, {
+    Checklist row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<CheckList>(
+    return session.db.deleteRow<Checklist>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<CheckList>> deleteWhere(
+  Future<List<Checklist>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<CheckListTable> where,
+    required _i1.WhereExpressionBuilder<ChecklistTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<CheckList>(
-      where: where(CheckList.t),
+    return session.db.deleteWhere<Checklist>(
+      where: where(Checklist.t),
       transaction: transaction,
     );
   }
 
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CheckListTable>? where,
+    _i1.WhereExpressionBuilder<ChecklistTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<CheckList>(
-      where: where?.call(CheckList.t),
+    return session.db.count<Checklist>(
+      where: where?.call(Checklist.t),
       limit: limit,
       transaction: transaction,
     );
