@@ -816,6 +816,15 @@ class Endpoints extends _i1.EndpointDispatch {
             params['existinguser'],
           ),
         ),
+        'getAllUser': _i1.MethodConnector(
+          name: 'getAllUser',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['user'] as _i12.UserEndpoint).getAllUser(session),
+        ),
       },
     );
     connectors['workspace'] = _i1.EndpointConnector(

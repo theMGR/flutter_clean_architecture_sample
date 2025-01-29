@@ -377,6 +377,13 @@ class EndpointUser extends _i1.EndpointRef {
         'checkUserExists',
         {'existinguser': existinguser},
       );
+
+  _i2.Future<List<_i12.User>> getAllUser() =>
+      caller.callServerEndpoint<List<_i12.User>>(
+        'user',
+        'getAllUser',
+        {},
+      );
 }
 
 /// {@category Endpoint}

@@ -17,4 +17,8 @@ class UserEndpoint extends Endpoint {
 
     return user;
   }
+
+  Future<List<User>> getAllUser(Session session) async {
+    return await User.db.find(session);
+  }
 }

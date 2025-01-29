@@ -43,6 +43,7 @@ user:
   - createUser:
   - getUserById:
   - checkUserExists:
+  - getAllUser:
 workspace:
   - createWorkspace:
   - getWorkspacesByUser:
