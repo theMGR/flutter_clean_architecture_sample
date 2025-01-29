@@ -1,9 +1,9 @@
-import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:my_store_serverpod_backend_client/my_store_serverpod_backend_client.dart';
 import 'package:flearn/trello_app_clone_serverpod/features/board/domain/board_arguments.dart';
 import 'package:flearn/trello_app_clone_serverpod/features/board/presentation/index.dart';
+import 'package:flearn/trello_app_clone_serverpod/re_lib/empty_widget/empty_widget.dart';
 
 import '../../../utils/color.dart';
 import '../../../utils/service.dart';
@@ -56,7 +56,7 @@ class _HomeState extends State<Home> with Service {
                 padding: const EdgeInsets.all(20.0),
                 child: EmptyWidget(
                   image: null,
-                  packageImage: PackageImage.Image_1,
+                  packageImage: PackageImage.image1,
                   title: 'No Boards',
                   subTitle: 'Create your first Trello board',
                   titleTextStyle: const TextStyle(

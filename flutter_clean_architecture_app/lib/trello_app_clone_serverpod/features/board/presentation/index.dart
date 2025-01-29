@@ -1,7 +1,7 @@
-import 'package:boardview/board_item.dart';
-import 'package:boardview/board_list.dart';
-import 'package:boardview/boardview.dart';
-import 'package:boardview/boardview_controller.dart';
+import 'package:flearn/trello_app_clone_serverpod/re_lib/boardview/board_item.dart';
+import 'package:flearn/trello_app_clone_serverpod/re_lib/boardview/board_list.dart';
+import 'package:flearn/trello_app_clone_serverpod/re_lib/boardview/boardview.dart';
+import 'package:flearn/trello_app_clone_serverpod/re_lib/boardview/boardview_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:my_store_serverpod_backend_client/my_store_serverpod_backend_client.dart';
 import 'package:flearn/trello_app_clone_serverpod/features/carddetails/domain/card_detail_arguments.dart';
@@ -42,11 +42,11 @@ class _BoardScreenState extends State<BoardScreen> with Service {
     final args = ModalRoute.of(context)!.settings.arguments as BoardArguments;
     trello.setSelectedBoard(args.board);
 
-    return WillPopScope(
-        onWillPop: () async {
-          Navigator.pushNamed(context, "/home");
-          return false;
-        },
+    return PopScope(
+      canPop: false,
+       onPopInvokedWithResult: (didPop, result) {
+         Navigator.pushNamed(context, "/home");
+       },
         child: Scaffold(
           appBar: (!show && !showCard)
               ? AppBar(

@@ -28,13 +28,22 @@ mixin Service {
             maxWidth: 260);
       }
     } on Exception catch (e) {
-      StatusAlert.show(context,
+      /*StatusAlert.show(context,
           duration: const Duration(seconds: 5),
           title: 'Trello Clone',
           subtitle: e.toString(),
           configuration:
               const IconConfiguration(icon: Icons.check, color: brandColor),
-          maxWidth: 260);
+          maxWidth: 260);*/
+      if(context.mounted) {
+        StatusAlert.show(context,
+            duration: const Duration(seconds: 5),
+            title: 'Trello Clone',
+            subtitle: e.toString(),
+            configuration:
+            const IconConfiguration(icon: Icons.check, color: brandColor),
+            maxWidth: 260);
+      }
     }
   }
 
@@ -60,13 +69,22 @@ mixin Service {
       //   }
       // }
     } on Exception catch (e) {
-      StatusAlert.show(context,
+      /*StatusAlert.show(context,
           duration: const Duration(seconds: 5),
           title: 'Trello Clone',
           subtitle: e.toString(),
           configuration:
               const IconConfiguration(icon: Icons.check, color: brandColor),
-          maxWidth: 260);
+          maxWidth: 260);*/
+      if(context.mounted) {
+        StatusAlert.show(context,
+            duration: const Duration(seconds: 5),
+            title: 'Trello Clone',
+            subtitle: e.toString(),
+            configuration:
+            const IconConfiguration(icon: Icons.check, color: brandColor),
+            maxWidth: 260);
+      }
     }
   }
 
@@ -113,13 +131,22 @@ mixin Service {
         Navigator.pushNamed(context, "/home");
       }
     } on Exception catch (e) {
-      StatusAlert.show(context,
+      /*StatusAlert.show(context,
           duration: const Duration(seconds: 5),
           title: 'Trello Clone',
           subtitle: e.toString(),
           configuration:
               const IconConfiguration(icon: Icons.check, color: brandColor),
-          maxWidth: 260);
+          maxWidth: 260);*/
+      if(context.mounted) {
+        StatusAlert.show(context,
+            duration: const Duration(seconds: 5),
+            title: 'Trello Clone',
+            subtitle: e.toString(),
+            configuration:
+            const IconConfiguration(icon: Icons.check, color: brandColor),
+            maxWidth: 260);
+      }
     }
   }
 
@@ -139,13 +166,22 @@ mixin Service {
         Navigator.pushNamed(context, "/home");
       }
     } on Exception catch (e) {
-      StatusAlert.show(context,
+      /*StatusAlert.show(context,
           duration: const Duration(seconds: 5),
           title: 'Trello Clone',
           subtitle: e.toString(),
           configuration:
               const IconConfiguration(icon: Icons.check, color: brandColor),
-          maxWidth: 260);
+          maxWidth: 260);*/
+      if(context.mounted) {
+        StatusAlert.show(context,
+            duration: const Duration(seconds: 5),
+            title: 'Trello Clone',
+            subtitle: e.toString(),
+            configuration:
+            const IconConfiguration(icon: Icons.check, color: brandColor),
+            maxWidth: 260);
+      }
     }
   }
 
