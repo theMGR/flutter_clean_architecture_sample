@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flearn/trello_app_clone_serverpod/utils/color.dart';
 
 class ArchivedLists extends StatefulWidget {
+  static const routeName = '/archivedlists';
   const ArchivedLists({super.key});
 
   @override

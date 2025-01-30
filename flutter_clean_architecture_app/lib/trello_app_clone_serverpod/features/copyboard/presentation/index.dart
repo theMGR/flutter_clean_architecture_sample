@@ -4,6 +4,7 @@ import '../../../utils/color.dart';
 import '../../../utils/constant.dart';
 
 class CopyBoard extends StatefulWidget {
+  static const routeName = '/copyboard';
   const CopyBoard({super.key});
 
   @override

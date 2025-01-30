@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 
 class PowerUps extends StatefulWidget {
+  static const routeName = '/powerups';
   const PowerUps({super.key});
 
   @override

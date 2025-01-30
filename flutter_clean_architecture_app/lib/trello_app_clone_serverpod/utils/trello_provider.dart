@@ -5,21 +5,27 @@ import 'config.dart';
 
 class TrelloProvider extends ChangeNotifier {
   late User _user;
+
   User get user => _user;
 
   List<Workspace> _workspaces = [];
+
   List<Workspace> get workspaces => _workspaces;
 
   List<Board> _boards = [];
+
   List<Board> get boards => _boards;
 
   String _selectedBackground = backgrounds[0];
+
   String get selectedBackground => _selectedBackground;
 
   List<Listboard> _lstbrd = [];
+
   List<Listboard> get lstbrd => _lstbrd;
 
   late Board _brd;
+
   Board get brd => _brd;
 
   void setUser(User user) {

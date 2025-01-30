@@ -7,6 +7,7 @@ import 'package:flearn/trello_app_clone_serverpod/utils/color.dart';
 import '../../activity/presentation/index.dart';
 
 class BoardMenu extends StatefulWidget {
+  static const routeName = '/boardmenu';
   const BoardMenu({super.key});
 
   @override

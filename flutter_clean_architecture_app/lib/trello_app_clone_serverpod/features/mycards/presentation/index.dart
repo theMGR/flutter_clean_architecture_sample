@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../drawer/presentation/index.dart';
 
 class MyCards extends StatefulWidget {
+  static const routeName = '/mycards';
   const MyCards({super.key});
 
   @override

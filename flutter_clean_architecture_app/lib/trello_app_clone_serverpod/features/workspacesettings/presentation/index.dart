@@ -4,6 +4,7 @@ import 'package:flearn/trello_app_clone_serverpod/utils/color.dart';
 import '../../visibility/presentation/index.dart';
 
 class WorkspaceSettings extends StatefulWidget {
+  static const routeName = '/workspacesettings';
   const WorkspaceSettings({super.key});
 
   @override

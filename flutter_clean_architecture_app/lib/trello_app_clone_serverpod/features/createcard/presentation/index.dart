@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../utils/color.dart';
 
 class CreateCard extends StatefulWidget {
+  static const routeName = '/createcard';
   const CreateCard({super.key});
 
   @override

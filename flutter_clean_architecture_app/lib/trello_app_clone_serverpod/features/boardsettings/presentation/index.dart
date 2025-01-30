@@ -7,6 +7,7 @@ import '../../closeboard/presentation/index.dart';
 import '../../editlabels/presentation/index.dart';
 
 class BoardSettings extends StatefulWidget {
+  static const routeName = '/boardsettings';
   const BoardSettings({super.key});
 
   @override

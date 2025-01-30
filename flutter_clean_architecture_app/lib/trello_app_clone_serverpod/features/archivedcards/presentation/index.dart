@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../utils/color.dart';
 
 class ArchivedCards extends StatefulWidget {
+  static const routeName = '/archivedcards';
   const ArchivedCards({super.key});
 
   @override

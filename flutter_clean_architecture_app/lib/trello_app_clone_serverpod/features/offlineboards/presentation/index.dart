@@ -8,6 +8,7 @@ import '../../../utils/service.dart';
 import '../../../utils/widgets.dart';
 
 class OfflineBoards extends StatefulWidget {
+  static const routeName = '/offlineboards';
   const OfflineBoards({super.key});
 
   @override

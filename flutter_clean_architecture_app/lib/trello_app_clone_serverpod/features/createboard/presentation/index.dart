@@ -7,6 +7,7 @@ import '../../../utils/constant.dart';
 import '../../../utils/service.dart';
 
 class CreateBoard extends StatefulWidget {
+  static const routeName = '/createboard';
   const CreateBoard({super.key});
 
   @override

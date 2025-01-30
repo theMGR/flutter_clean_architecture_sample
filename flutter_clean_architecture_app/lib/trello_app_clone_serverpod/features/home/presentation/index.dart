@@ -12,6 +12,8 @@ import '../../drawer/presentation/index.dart';
 import 'custom_floating_action.dart';
 
 class Home extends StatefulWidget {
+
+  static const routeName = '/home';
   const Home({super.key});
 
   @override

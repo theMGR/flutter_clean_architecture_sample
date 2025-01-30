@@ -5,6 +5,7 @@ import '../../../utils/color.dart';
 import '../../../utils/service.dart';
 
 class CreateWorkspace extends StatefulWidget {
+  static const routeName = '/createworkspace';
   const CreateWorkspace({super.key});
 
   @override

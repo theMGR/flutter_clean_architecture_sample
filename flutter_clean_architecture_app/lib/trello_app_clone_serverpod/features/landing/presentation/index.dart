@@ -68,8 +68,7 @@ class _LandingState extends State<Landing> with Service {
                       return const LandingBottomSheet(Sign.logIn);
                     });
               },
-              style: OutlinedButton.styleFrom(
-                  side: const BorderSide(width: 1.0, color: brandColor)),
+              style: OutlinedButton.styleFrom(side: const BorderSide(width: 1.0, color: brandColor)),
               child: const Text("Log in"),
             ),
           ),

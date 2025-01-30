@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flearn/trello_app_clone_serverpod/utils/constant.dart';
 
 class AboutBoard extends StatefulWidget {
+  static const routeName = '/aboutboard';
   const AboutBoard({super.key});
 
   @override

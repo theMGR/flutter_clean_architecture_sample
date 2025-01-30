@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../utils/color.dart';
 
 class WorkspaceMenu extends StatefulWidget {
+  static const routeName = '/workspacemenu';
   const WorkspaceMenu({super.key});
 
   @override

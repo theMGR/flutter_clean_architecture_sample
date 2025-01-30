@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Notifications extends StatefulWidget {
+
+  static const routeName = '/notifications';
   const Notifications({super.key});
 
   @override

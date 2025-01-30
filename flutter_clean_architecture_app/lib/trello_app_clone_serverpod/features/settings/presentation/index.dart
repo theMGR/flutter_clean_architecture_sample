@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flearn/trello_app_clone_serverpod/features/drawer/presentation/index.dart';
 
 class Settings extends StatefulWidget {
+  static const routeName = '/settings';
   const Settings({super.key});
 
   @override

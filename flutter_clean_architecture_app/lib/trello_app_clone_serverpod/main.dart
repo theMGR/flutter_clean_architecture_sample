@@ -37,14 +37,12 @@ import 'features/workspacesettings/presentation/index.dart';
 // The client is set up to connect to a Serverpod running on a local server on
 // the default port. You will need to modify this to connect to staging or
 // production servers.
-var client = Client('http://localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
+var client = Client('http://localhost:8080/')..connectivityMonitor = FlutterConnectivityMonitor();
 
 TrelloProvider trello = TrelloProvider();
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (context) => TrelloProvider(), child: const MyApp()));
+  runApp(ChangeNotifierProvider(create: (context) => TrelloProvider(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -53,7 +51,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Trello App Clone',
+      title: 'Serverpod Ex',
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
               fontFamily: GoogleFonts.poppins().fontFamily,
@@ -62,31 +60,31 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Landing(),
-        '/home': (context) => const Home(),
-        '/notifications': (context) => const Notifications(),
-        '/workspacemenu': (context) => const WorkspaceMenu(),
-        '/workspacesettings': (context) => const WorkspaceSettings(),
-        '/members': (context) => const Members(),
-        '/invitemember': (context) => const InviteMember(),
-        '/createworkspace': (context) => const CreateWorkspace(),
-        '/createboard': (context) => const CreateBoard(),
-        '/boardbackground': (context) => const BoardBackground(),
-        '/createcard': (context) => const CreateCard(),
+        Home.routeName: (context) => const Home(),
+        Notifications.routeName: (context) => const Notifications(),
+        WorkspaceMenu.routeName: (context) => const WorkspaceMenu(),
+        WorkspaceSettings.routeName: (context) => const WorkspaceSettings(),
+        Members.routeName: (context) => const Members(),
+        InviteMember.routeName: (context) => const InviteMember(),
+        CreateWorkspace.routeName: (context) => const CreateWorkspace(),
+        CreateBoard.routeName: (context) => const CreateBoard(),
+        BoardBackground.routeName: (context) => const BoardBackground(),
+        CreateCard.routeName: (context) => const CreateCard(),
         BoardScreen.routeName: (context) => const BoardScreen(),
-        '/boardmenu': (context) => const BoardMenu(),
-        '/copyboard': (context) => const CopyBoard(),
-        '/boardsettings': (context) => const BoardSettings(),
-        '/archivedlists': (context) => const ArchivedLists(),
-        '/archivedcards': (context) => const ArchivedCards(),
-        '/emailtoboard': (context) => const EmailToBoard(),
-        '/aboutboard': (context) => const AboutBoard(),
-        '/powerups': (context) => const PowerUps(),
+        BoardMenu.routeName: (context) => const BoardMenu(),
+        CopyBoard.routeName: (context) => const CopyBoard(),
+        BoardSettings.routeName: (context) => const BoardSettings(),
+        ArchivedLists.routeName: (context) => const ArchivedLists(),
+        ArchivedCards.routeName: (context) => const ArchivedCards(),
+        EmailToBoard.routeName: (context) => const EmailToBoard(),
+        AboutBoard.routeName: (context) => const AboutBoard(),
+        PowerUps.routeName: (context) => const PowerUps(),
         CardDetails.routeName: (context) => const CardDetails(),
-        '/mycards': (context) => const MyCards(),
-        '/offlineboards': (context) => const OfflineBoards(),
-        '/settings': (context) => const Settings(),
+        MyCards.routeName: (context) => const MyCards(),
+        OfflineBoards.routeName: (context) => const OfflineBoards(),
+        Settings.routeName: (context) => const Settings(),
         SignToTrello.routeName: (context) => const SignToTrello(),
-        '/workspace': (context) => const WorkspaceScreen()
+        WorkspaceScreen.routeName: (context) => const WorkspaceScreen()
       },
       debugShowCheckedModeBanner: false,
     );

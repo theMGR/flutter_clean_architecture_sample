@@ -3,6 +3,7 @@ import 'package:flearn/trello_app_clone_serverpod/utils/config.dart';
 import '../../../main.dart';
 
 class BoardBackground extends StatefulWidget {
+  static const routeName = '/boardbackground';
   const BoardBackground({super.key});
 
   @override

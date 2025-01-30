@@ -8,6 +8,7 @@ import '../../../utils/config.dart';
 
 class LandingBottomSheet extends StatefulWidget {
   final Enum type;
+
   const LandingBottomSheet(this.type, {super.key});
 
   @override
@@ -24,17 +25,14 @@ class _LandingBottomSheetState extends State<LandingBottomSheet> {
           ListTile(
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, SignToTrello.routeName,
-                  arguments: SignArguments(widget.type));
+              Navigator.pushNamed(context, SignToTrello.routeName, arguments: SignArguments(widget.type));
             },
             leading: const Icon(
               Icons.email,
               color: brandColor,
             ),
             title: Text(
-              (widget.type == Sign.signUp)
-                  ? " SIGN UP WITH EMAIL"
-                  : "LOG IN WITH EMAIL",
+              (widget.type == Sign.signUp) ? " SIGN UP WITH EMAIL" : "LOG IN WITH EMAIL",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
@@ -45,9 +43,7 @@ class _LandingBottomSheetState extends State<LandingBottomSheet> {
               color: brandColor,
             ),
             title: Text(
-              (widget.type == Sign.signUp)
-                  ? " SIGN UP WITH GOOGLE"
-                  : "LOG IN WITH GOOGLE",
+              (widget.type == Sign.signUp) ? " SIGN UP WITH GOOGLE" : "LOG IN WITH GOOGLE",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
@@ -58,9 +54,7 @@ class _LandingBottomSheetState extends State<LandingBottomSheet> {
               color: brandColor,
             ),
             title: Text(
-              (widget.type == Sign.signUp)
-                  ? " SIGN UP WITH MICROSOFT"
-                  : "LOG IN WITH MICROSOFT",
+              (widget.type == Sign.signUp) ? " SIGN UP WITH MICROSOFT" : "LOG IN WITH MICROSOFT",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
@@ -71,9 +65,7 @@ class _LandingBottomSheetState extends State<LandingBottomSheet> {
               color: brandColor,
             ),
             title: Text(
-              (widget.type == Sign.signUp)
-                  ? " SIGN UP WITH APPLE"
-                  : "LOG IN WITH APPLE",
+              (widget.type == Sign.signUp) ? " SIGN UP WITH APPLE" : "LOG IN WITH APPLE",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           )
