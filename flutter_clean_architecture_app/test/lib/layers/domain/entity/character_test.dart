@@ -1,4 +1,4 @@
-import 'package:flearn/layers/domain/entity/character.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/entity/character.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/presentation/shared/character_list_item.dart';
-import 'package:flearn/layers/presentation/using_cubit/list_page/cubit/character_page_cubit.dart';
-import 'package:flearn/layers/presentation/using_cubit/list_page/view/character_page.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/shared/character_list_item.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_cubit/list_page/cubit/character_page_cubit.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_cubit/list_page/view/character_page.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 import '../../../helper/pump_app.dart';

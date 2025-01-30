@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flearn/layers/presentation/using_provider/details_page/change_notifier/character_details_change_notifier.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_provider/details_page/change_notifier/character_details_change_notifier.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 

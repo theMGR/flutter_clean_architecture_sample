@@ -81,6 +81,7 @@ dependencies:
   crypto: ^3.0.6
   status_alert: ^1.0.1
 #  empty_widget: ^0.0.5
+  responsive_grid_list: ^1.4.0
 
 dev_dependencies:
   flutter_test:

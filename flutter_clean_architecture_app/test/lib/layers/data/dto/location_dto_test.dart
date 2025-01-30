@@ -1,4 +1,4 @@
-import 'package:flearn/layers/data/dto/location_dto.dart';
+import 'package:flearn/flutter_architecture_sample/layers/data/dto/location_dto.dart';
 import 'package:test/test.dart';
 
 void main() {

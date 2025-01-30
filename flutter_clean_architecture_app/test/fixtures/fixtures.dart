@@ -1,5 +1,5 @@
-import 'package:flearn/layers/data/dto/character_dto.dart';
-import 'package:flearn/layers/data/dto/location_dto.dart';
+import 'package:flearn/flutter_architecture_sample/layers/data/dto/character_dto.dart';
+import 'package:flearn/flutter_architecture_sample/layers/data/dto/location_dto.dart';
 
 final characterDto = CharacterDto(
   id: 1,

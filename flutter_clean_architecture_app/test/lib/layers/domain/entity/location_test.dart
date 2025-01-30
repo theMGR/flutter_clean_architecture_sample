@@ -1,4 +1,4 @@
-import 'package:flearn/layers/domain/entity/location.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/entity/location.dart';
 import 'package:test/test.dart';
 
 void main() {

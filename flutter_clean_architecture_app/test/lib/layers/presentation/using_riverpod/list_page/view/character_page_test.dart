@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/presentation/using_riverpod/providers.dart';
-import 'package:flearn/layers/presentation/using_riverpod/list_page/view/character_page.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_riverpod/providers.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_riverpod/list_page/view/character_page.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 import '../../../helper/pump_app.dart';

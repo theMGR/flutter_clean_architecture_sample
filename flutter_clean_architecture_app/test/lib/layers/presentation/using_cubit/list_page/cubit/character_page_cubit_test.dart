@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/presentation/using_cubit/list_page/cubit/character_page_cubit.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_cubit/list_page/cubit/character_page_cubit.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 import '../../../helper/pump_app.dart';

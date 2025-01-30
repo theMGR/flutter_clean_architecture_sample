@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockingjay/mockingjay.dart';
-import 'package:flearn/layers/domain/usecase/get_all_characters.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/usecase/get_all_characters.dart';
 
 class GetAllCharactersMock extends Mock implements GetAllCharacters {}
 

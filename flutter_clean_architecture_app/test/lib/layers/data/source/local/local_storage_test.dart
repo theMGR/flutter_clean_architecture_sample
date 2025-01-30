@@ -1,5 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/data/source/local/local_storage.dart';
+import 'package:flearn/flutter_architecture_sample/layers/data/source/local/local_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 

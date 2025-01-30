@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flearn/layers/presentation/using_bloc/details_page/bloc/character_details_bloc.dart';
-import 'package:flearn/layers/presentation/using_bloc/details_page/view/character_details_page.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_bloc/details_page/bloc/character_details_bloc.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_bloc/details_page/view/character_details_page.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 

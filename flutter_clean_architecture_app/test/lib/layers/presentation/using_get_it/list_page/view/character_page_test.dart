@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/domain/usecase/get_all_characters.dart';
-import 'package:flearn/layers/presentation/shared/character_list_item.dart';
-import 'package:flearn/layers/presentation/using_get_it/list_page/controller/character_page_controller.dart';
-import 'package:flearn/layers/presentation/using_get_it/injector.dart';
-import 'package:flearn/layers/presentation/using_get_it/list_page/view/character_page.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/usecase/get_all_characters.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/shared/character_list_item.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_get_it/list_page/controller/character_page_controller.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_get_it/injector.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_get_it/list_page/view/character_page.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 import '../../../helper/pump_app.dart';

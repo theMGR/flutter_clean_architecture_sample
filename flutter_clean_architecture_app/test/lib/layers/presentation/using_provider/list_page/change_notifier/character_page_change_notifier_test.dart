@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/presentation/using_provider/list_page/change_notifier/character_page_change_notifier.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_provider/list_page/change_notifier/character_page_change_notifier.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 import '../../../helper/pump_app.dart';

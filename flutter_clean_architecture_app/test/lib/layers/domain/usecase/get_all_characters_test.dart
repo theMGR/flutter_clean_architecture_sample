@@ -1,7 +1,7 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/domain/entity/character.dart';
-import 'package:flearn/layers/domain/repository/character_repository.dart';
-import 'package:flearn/layers/domain/usecase/get_all_characters.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/entity/character.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/repository/character_repository.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/usecase/get_all_characters.dart';
 import 'package:test/test.dart';
 
 class MockCharacterRepository extends Mock implements CharacterRepository {}

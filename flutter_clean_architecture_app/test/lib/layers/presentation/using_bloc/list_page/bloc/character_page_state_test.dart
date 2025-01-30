@@ -1,5 +1,5 @@
-import 'package:flearn/layers/domain/entity/character.dart';
-import 'package:flearn/layers/presentation/using_bloc/list_page/bloc/character_page_bloc.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/entity/character.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_bloc/list_page/bloc/character_page_bloc.dart';
 import 'package:test/test.dart';
 
 void main() {

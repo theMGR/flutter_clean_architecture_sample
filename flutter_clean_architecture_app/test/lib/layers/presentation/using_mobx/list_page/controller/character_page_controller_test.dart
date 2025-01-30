@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/presentation/using_mobx/list_page/store/character_page_store.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_mobx/list_page/store/character_page_store.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 import '../../../helper/pump_app.dart';

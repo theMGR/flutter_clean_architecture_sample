@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/domain/usecase/get_all_characters.dart';
-import 'package:flearn/layers/presentation/using_bloc/list_page/bloc/character_page_bloc.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/usecase/get_all_characters.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_bloc/list_page/bloc/character_page_bloc.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 

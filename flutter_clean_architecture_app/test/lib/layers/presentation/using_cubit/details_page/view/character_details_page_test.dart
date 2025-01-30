@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flearn/layers/presentation/using_cubit/details_page/cubit/character_details_cubit.dart';
-import 'package:flearn/layers/presentation/using_cubit/details_page/view/character_details_page.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_cubit/details_page/cubit/character_details_cubit.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_cubit/details_page/view/character_details_page.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 

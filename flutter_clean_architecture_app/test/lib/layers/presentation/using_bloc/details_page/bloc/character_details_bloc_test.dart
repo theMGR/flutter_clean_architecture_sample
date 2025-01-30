@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flearn/layers/domain/entity/character.dart';
-import 'package:flearn/layers/presentation/using_bloc/details_page/bloc/character_details_bloc.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/entity/character.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_bloc/details_page/bloc/character_details_bloc.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 

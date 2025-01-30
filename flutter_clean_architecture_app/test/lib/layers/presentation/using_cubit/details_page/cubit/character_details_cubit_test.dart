@@ -1,5 +1,5 @@
-import 'package:flearn/layers/domain/entity/character.dart';
-import 'package:flearn/layers/presentation/using_cubit/details_page/cubit/character_details_cubit.dart';
+import 'package:flearn/flutter_architecture_sample/layers/domain/entity/character.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_cubit/details_page/cubit/character_details_cubit.dart';
 import 'package:test/test.dart';
 
 void main() {

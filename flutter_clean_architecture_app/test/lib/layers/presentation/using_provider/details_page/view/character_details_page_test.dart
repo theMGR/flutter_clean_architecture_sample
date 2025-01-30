@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:flearn/layers/presentation/using_provider/details_page/change_notifier/character_details_change_notifier.dart';
-import 'package:flearn/layers/presentation/using_provider/details_page/view/character_details_page.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_provider/details_page/change_notifier/character_details_change_notifier.dart';
+import 'package:flearn/flutter_architecture_sample/layers/presentation/using_provider/details_page/view/character_details_page.dart';
 
 import '../../../../../../fixtures/fixtures.dart';
 

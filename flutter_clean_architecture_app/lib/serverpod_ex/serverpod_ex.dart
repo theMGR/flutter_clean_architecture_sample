@@ -1,4 +1,4 @@
-import 'package:flearn/main.dart';
+import 'package:flearn/flutter_architecture_sample/main.dart';
 import 'package:flearn/serverpod_ex/twilio_ex.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +71,7 @@ class ServerPodExState extends State<ServerPodEx> {
 
 
 
-    return Scaffold(
+    /*return Scaffold(
       //appBar: AppBar(title: Text('data'),),
       body: SingleChildScrollView(
         child: Padding(
@@ -102,7 +102,7 @@ class ServerPodExState extends State<ServerPodEx> {
           ),
         ),
       ),
-    );
+    );*/
   }
 }
 

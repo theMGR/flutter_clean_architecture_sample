@@ -1,7 +1,7 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:flearn/layers/data/character_repository_impl.dart';
-import 'package:flearn/layers/data/source/local/local_storage.dart';
-import 'package:flearn/layers/data/source/network/api.dart';
+import 'package:flearn/flutter_architecture_sample/layers/data/character_repository_impl.dart';
+import 'package:flearn/flutter_architecture_sample/layers/data/source/local/local_storage.dart';
+import 'package:flearn/flutter_architecture_sample/layers/data/source/network/api.dart';
 import 'package:test/test.dart';
 
 import '../../../fixtures/fixtures.dart';

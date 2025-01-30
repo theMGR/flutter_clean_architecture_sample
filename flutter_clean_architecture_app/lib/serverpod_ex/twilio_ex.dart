@@ -1,4 +1,4 @@
-import 'package:flearn/main.dart';
+import 'package:flearn/flutter_architecture_sample/main.dart';
 import 'package:flutter/material.dart';
 import 'package:twilio_flutter/twilio_flutter.dart';
 
@@ -75,9 +75,26 @@ class _TwilioExState extends State<TwilioEx> {
   }
 
   void getSms() async {
-    TwilioResponse twilioResponse = await twilioFlutter.getSmsList();
+    try {
+      TwilioResponse twilioResponse = await twilioFlutter.getSmsList();
 
-    await twilioFlutter.getSMS('');
+      await twilioFlutter.getSMS('');
+
+      print('****> getSms twilioResponse: ${twilioResponse.toString()}');
+
+      setState(() {
+        if (twilioResponse.responseState == ResponseState.SUCCESS) {
+          _errorMessage = null;
+          _resultMessage = 'getSms success';
+        } else {
+          _errorMessage = 'getSms error';
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = '$e';
+      });
+    }
   }
 
   void sendScheduledSms() async {
@@ -85,7 +102,24 @@ class _TwilioExState extends State<TwilioEx> {
   }
 
   void cancelScheduledSMS() async {
-    TwilioResponse twilioResponse = await twilioMessagingService.cancelScheduledSms(messageSid: '');
+    try {
+      TwilioResponse twilioResponse = await twilioMessagingService.cancelScheduledSms(messageSid: '');
+
+      print('****> cancelScheduledSMS twilioResponse: ${twilioResponse.toString()}');
+
+      setState(() {
+        if (twilioResponse.responseState == ResponseState.SUCCESS) {
+          _errorMessage = null;
+          _resultMessage = 'cancelScheduledSMS success';
+        } else {
+          _errorMessage = 'cancelScheduledSMS error';
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = '$e';
+      });
+    }
   }
 
   void sendOTP(String phone) async {
