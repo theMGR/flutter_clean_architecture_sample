@@ -1,0 +1,19 @@
+# Ignore everything
+/*
+
+!.gitignore
+!.gitpod.yml
+!.gitpod.Dockerfile
+!learn.json
+!README.md
+!README.es.md
+!.vscode
+
+!/exercises
+!/exercises/*
+
+!/.learn
+/.learn/**
+!/.learn/resets
+!/.learn/resets/**
+!/.learn/dist/index.html
