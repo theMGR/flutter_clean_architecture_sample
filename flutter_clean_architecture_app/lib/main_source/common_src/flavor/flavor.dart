@@ -4,6 +4,10 @@ import 'package:flearn/main_source/common_src/flavor/flavors_type.dart';
 class Flavor {
   static const String flavor = String.fromEnvironment('FLAVOR');
 
+  // get baseUrl from env/json/baseUrl
+  // how to use: --dart-define-from-file=env/dev.json
+  static const String baseUrlFromJson = String.fromEnvironment('baseUrl');
+
   static get() {
     return flavor;
   }

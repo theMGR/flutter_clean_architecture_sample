@@ -1,0 +1,66 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+
+        {
+            "name": "DEV flutter_clean_architecture_app",
+            "cwd": "flutter_clean_architecture_app",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=env/dev.json"
+            ]
+        },
+        {
+            "name": "QA flutter_clean_architecture_app",
+            "cwd": "flutter_clean_architecture_app",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file=env/qa.json"
+            ]
+        },
+        {
+            "name": "flutter_clean_architecture_app (profile mode)",
+            "cwd": "flutter_clean_architecture_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_clean_architecture_app (release mode)",
+            "cwd": "flutter_clean_architecture_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "my_pod_client",
+            "cwd": "my_pod_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "my_pod_server",
+            "cwd": "my_pod_server",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "my_store_serverpod_backend_client",
+            "cwd": "my_store_serverpod_backend\\my_store_serverpod_backend_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "my_store_serverpod_backend_server",
+            "cwd": "my_store_serverpod_backend\\my_store_serverpod_backend_server",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
