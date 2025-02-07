@@ -5,6 +5,6 @@ class StringConstant {
 
   static const String bgStill = "still";
 
-
-
+  static const String userActive = 'UA1';
+  static const String userInActive = 'UA2';
 }

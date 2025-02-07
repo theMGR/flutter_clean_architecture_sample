@@ -1,12 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flearn/main_source/common_src/constants/value_constant.dart';
+import 'package:flearn/main_source/common_src/flavor_res/app_strings.dart';
 import 'package:flearn/main_source/configuration/dio_client/talker_dio_interceptor.dart';
 import 'package:flearn/main_source/configuration/error/failure.dart';
 import 'package:flearn/main_source/configuration/firebase/firebase_crashlogger.dart';
 import 'package:flearn/main_source/data/dto/location_status_dto.dart';
 import 'package:flearn/main_source/data/source/local/prefs.dart';
+import 'package:flutter/foundation.dart';
 
 import '../config/either.dart';
+import 'isolate_parser.dart';
+
+typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with FirebaseCrashLogger {
   final bool isUnitTest;
@@ -15,17 +20,25 @@ class DioClient with FirebaseCrashLogger {
   final Dio dio;
 
   DioClient({required this.dio, required this.prefs, this.isUnitTest = false}) {
-    try {
-      //_auth = getData(MainBoxKeys.token); //todo manivannan
-    } catch (_) {}
-
     if (!isUnitTest) {
       //dio.interceptors.add(DioInterceptor(this));
-      dio.interceptors.add(TalkerDioInterceptor());
+      dio.interceptors.add(TalkerDioInterceptor(
+        dioClient: this,
+        onRefreshToken: () async {
+          return prefs.getBearerToken() ?? '';
+        },
+      ));
     }
   }
 
-  Future<Either<Failure, dynamic>> getEither(String url, {Map<String, dynamic>? queryParameters, ProgressCallback? onReceiveProgress, bool requireBearerToken = true}) async {
+  Future<Either<Failure, dynamic>> getEither(
+    String url, {
+    Map<String, dynamic>? queryParameters,
+    ProgressCallback? onReceiveProgress,
+    bool requireBearerToken = true,
+    String? baseUrl,
+    ResponseConverter<dynamic>? isolateConverter,
+  }) async {
     try {
       if (requireBearerToken == false) {
         dio.options.headers.remove(ValueConstant.authorization);
@@ -34,6 +47,13 @@ class DioClient with FirebaseCrashLogger {
           dio.options.headers.putIfAbsent(ValueConstant.authorization, () async => ValueConstant.onGetBearerToken(prefs.getBearerToken()));
         }
       }
+
+      if (baseUrl != null) {
+        dio.options.baseUrl = baseUrl;
+      } else {
+        dio.options.baseUrl = AppStrings.get().baseUrl();
+      }
+
       final response = await dio.get(url, queryParameters: queryParameters, onReceiveProgress: onReceiveProgress);
       if ((response.statusCode ?? 0) < 200 || (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -41,7 +61,16 @@ class DioClient with FirebaseCrashLogger {
           response: response,
         );
       } else {
-        return Either.right(response.data);
+        if (isolateConverter != null) {
+          final isolateParse = IsolateParser<dynamic>(
+            response.data as Map<String, dynamic>,
+            isolateConverter,
+          );
+          final result = await isolateParse.parseInBackground();
+          return Either.right(result);
+        } else {
+          return Either.right(response.data);
+        }
       }
     } on DioException catch (e, stackTrace) {
       if (!isUnitTest) {
@@ -53,7 +82,15 @@ class DioClient with FirebaseCrashLogger {
     }
   }
 
-  Future<Either<Failure, dynamic>> postEither(String url, {dynamic data, ProgressCallback? onReceiveProgress, ProgressCallback? onSendProgress, bool requireBearerToken = true}) async {
+  Future<Either<Failure, dynamic>> postEither(
+    String url, {
+    dynamic data,
+    ProgressCallback? onReceiveProgress,
+    ProgressCallback? onSendProgress,
+    bool requireBearerToken = true,
+    String? baseUrl,
+    ResponseConverter<dynamic>? isolateConverter,
+  }) async {
     try {
       if (requireBearerToken == false) {
         dio.options.headers.remove(ValueConstant.authorization);
@@ -62,6 +99,13 @@ class DioClient with FirebaseCrashLogger {
           dio.options.headers.putIfAbsent(ValueConstant.authorization, () async => ValueConstant.onGetBearerToken(prefs.getBearerToken()));
         }
       }
+
+      if (baseUrl != null) {
+        dio.options.baseUrl = baseUrl;
+      } else {
+        dio.options.baseUrl = AppStrings.get().baseUrl();
+      }
+
       final response = await dio.post(url, data: data, onReceiveProgress: onReceiveProgress, onSendProgress: onSendProgress);
       if ((response.statusCode ?? 0) < 200 || (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -69,7 +113,13 @@ class DioClient with FirebaseCrashLogger {
           response: response,
         );
       } else {
-        return Either.right(response.data);
+        if (isolateConverter != null) {
+          final isolateParse = IsolateParser<dynamic>(response.data as Map<String, dynamic>, isolateConverter);
+          final result = await isolateParse.parseInBackground();
+          return Either.right(result);
+        } else {
+          return Either.right(response.data);
+        }
       }
     } on DioException catch (e, stackTrace) {
       if (!isUnitTest) {
@@ -81,7 +131,7 @@ class DioClient with FirebaseCrashLogger {
     }
   }
 
-  Future<Response> get(String url, {Map<String, dynamic>? params, ProgressCallback? onReceiveProgress, bool requireBearerToken = true}) async {
+  Future<Response> get(String url, {Map<String, dynamic>? params, ProgressCallback? onReceiveProgress, bool requireBearerToken = true, String? baseUrl}) async {
     try {
       if (requireBearerToken == false) {
         dio.options.headers.remove(ValueConstant.authorization);
@@ -89,6 +139,12 @@ class DioClient with FirebaseCrashLogger {
         if (dio.options.headers.keys.contains(ValueConstant.authorization) == false || dio.options.headers[ValueConstant.authorization] == null) {
           dio.options.headers.putIfAbsent(ValueConstant.authorization, () async => ValueConstant.onGetBearerToken(prefs.getBearerToken()));
         }
+      }
+
+      if (baseUrl != null) {
+        dio.options.baseUrl = baseUrl;
+      } else {
+        dio.options.baseUrl = AppStrings.get().baseUrl();
       }
 
       return await dio.get(url, queryParameters: params, onReceiveProgress: onReceiveProgress);
@@ -97,7 +153,7 @@ class DioClient with FirebaseCrashLogger {
     }
   }
 
-  Future<Response> post(String url, {dynamic data, ProgressCallback? onReceiveProgress, ProgressCallback? onSendProgress, bool requireBearerToken = true}) async {
+  Future<Response> post(String url, {dynamic data, ProgressCallback? onReceiveProgress, ProgressCallback? onSendProgress, bool requireBearerToken = true, String? baseUrl}) async {
     try {
       if (requireBearerToken == false) {
         dio.options.headers.remove(ValueConstant.authorization);
@@ -106,24 +162,16 @@ class DioClient with FirebaseCrashLogger {
           dio.options.headers.putIfAbsent(ValueConstant.authorization, () async => ValueConstant.onGetBearerToken(prefs.getBearerToken()));
         }
       }
+
+      if (baseUrl != null) {
+        dio.options.baseUrl = baseUrl;
+      } else {
+        dio.options.baseUrl = AppStrings.get().baseUrl();
+      }
+
       return await dio.post(url, data: data, onReceiveProgress: onReceiveProgress, onSendProgress: onSendProgress);
     } on DioException catch (e) {
       throw _handleError(e);
-    }
-  }
-
-  // todo manivannan G
-  Future<String?> refreshToken() async {
-    try {
-      final response = await dio.post('/getBearerToken', data: {
-        'userName': 'your_username', // Replace with actual username
-        'password': 'your_password', // Replace with actual password
-      });
-      //_auth = response.data['token'];
-      return '';
-    } catch (e, stackTrace) {
-      nonFatalError(error: e, stackTrace: stackTrace);
-      return null;
     }
   }
 
@@ -147,11 +195,11 @@ void howToUse(Dio dio, Prefs prefs) async {
   result.fold(
     onLeft: (failure) {
       if (failure is ServerFailure) {}
-      print('Error: ${failure is ServerFailure}');
+      debugPrint('Error: ${failure is ServerFailure}');
     },
     onRight: (response) {
       final user = LocationStatusDto.fromJson(response); // Parse the response here
-      print('User: ${user.userId}');
+      debugPrint('User: ${user.userId}');
     },
   );
 }

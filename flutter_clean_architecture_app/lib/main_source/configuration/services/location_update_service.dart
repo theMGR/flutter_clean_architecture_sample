@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 
+import 'package:flearn/main_source/common_src/constants/string_constant.dart';
 import 'package:flearn/main_source/configuration/config/config.dart';
 import 'package:flearn/main_source/configuration/di/initialize_di.dart';
 import 'package:flearn/main_source/configuration/services/location_track_transistor.dart';
@@ -17,13 +18,11 @@ import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LocationUpdateService {
-
   Prefs prefs;
   LocationTrackByTransistor locationTrackByTransistor;
   LocationUpdateUseCase locationUpdateUseCase;
 
-  LocationUpdateService({required this.prefs,required  this.locationTrackByTransistor,required  this.locationUpdateUseCase});
-
+  LocationUpdateService({required this.prefs, required this.locationTrackByTransistor, required this.locationUpdateUseCase});
 
   Future<void> startLocationUpdates([bool isFromNotification = false]) async {
     if (await isLocationEnabled() == false) {
@@ -34,7 +33,7 @@ class LocationUpdateService {
       debugPrint("===PERMISSION ALWAYS NOT ENABLED====");
     } else if (Platform.isAndroid && !await Permission.activityRecognition.isGranted) {
       debugPrint("===ACTIVITY PERMISSION ALWAYS NOT ENABLED====");
-    } else if (Platform.isAndroid && !await ConfigureBatteryOptimizationController.isIgnoringBatteryOptimisation()) {
+    } else if (Platform.isAndroid /*&& !await ConfigureBatteryOptimizationController.isIgnoringBatteryOptimisation()*/) {
       debugPrint("===BATTERY OPTIMISATION ENABLED====");
     } else if (await prefs.isTracking() != true) {
       debugPrint("===USER IN OFFLINE====");
@@ -56,7 +55,6 @@ class LocationUpdateService {
   }
 
   Future<void> updateDriverStatus(bool isActive, [bool isFromNotification = false]) async {
-
     Position? position = await getCurrentPosition();
     if (position != null) {
       if (isFromNotification == true) {
@@ -65,22 +63,14 @@ class LocationUpdateService {
         await initializeDi();
       }
 
-      UserStatusDto locationStatusDto = UserStatusDto(latitude: double.parse(position.longitude.toStringAsFixed(7)), longitude: double.parse(position.latitude.toStringAsFixed(7)), userId: await prefs.getUserId(), latLongInsertUpdateTime: DateTime.now().toString());
-
-      if (!Get.isRegistered<UpdateDriverStatusUseCase>()) Get.lazyPut(() => UpdateDriverStatusUseCase());
-
-      var result = await Get.find<UpdateDriverStatusUseCase>().execute(model).catchError((e) {
-        debugPrint("==========EXCEPTION=$e==========");
-      });
-      if (result != null && result.status == 1) {
-        if (!LocationTrackByTransistor.driverInfo.isClosed) LocationTrackByTransistor.driverInfo.sink.add(result);
-        customSharedPrefs!.saveDriverLastLocation(result.latitude, result.longitude, result.latLongInsertUpdateTime);
-        debugPrint('==FORCE LOCATION UPDATE SUCCESS==');
-      } else
-        debugPrint('==FORCE LOCATION UPDATE FAILURE==');
+      locationTrackByTransistor.updateDriverStatusByTransistor(
+        latitude: position.latitude,
+        longitude: position.longitude,
+        activeStatusTypeId: isActive ? StringConstant.userActive : StringConstant.userInActive,
+        locationActivityType: 'Force update $isFromNotification',
+      );
     }
   }
-
 
   Future<bool> changeDriverStatus() async {
     if (await prefs.isTracking() == true) {
@@ -91,4 +81,3 @@ class LocationUpdateService {
     return Future.value(data);
   }
 }
-

@@ -7,9 +7,10 @@ import 'package:flearn/main_source/configuration/firebase/firebase_crashlogger.d
 import 'package:flutter/material.dart';
 
 class DioInterceptor extends Interceptor with FirebaseCrashLogger {
-  final DioClient _dioClient;
+  final DioClient dioClient;
+  Future<String> Function() onRefreshToken;
 
-  DioInterceptor(this._dioClient);
+  DioInterceptor({required this.dioClient, required this.onRefreshToken});
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -54,14 +55,14 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
 
     if (err.response?.statusCode == 401 || err.type == DioExceptionType.connectionTimeout) {
       // Token expired, refresh the token
-      String? bearerToken = await _dioClient.refreshToken();
+      String? bearerToken = await onRefreshToken();
 
       // Retry the original request with the new token
       final options = err.requestOptions;
       options.headers['Authorization'] = 'Bearer $bearerToken';
 
       try {
-        final response = await _dioClient.dio.request(
+        final response = await dioClient.dio.request(
           options.path,
           data: options.data,
           queryParameters: options.queryParameters,

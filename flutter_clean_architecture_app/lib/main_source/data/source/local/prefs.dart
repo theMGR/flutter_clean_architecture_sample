@@ -3,9 +3,26 @@ import 'package:flearn/main_source/configuration/config/my_shared_pref.dart';
 class Prefs {
   final MySharedPref mySharedPref;
 
+  //keys
+  final String userIdKey = 'userId';
+  final String latitudeKey = 'latitude';
+  final String longitudeKey = 'longitude';
+  final String userNameKey = 'userName';
+  final String passwordKey = 'password';
+  final String latLongInsertUpdateTimeKey = 'latLongInsertUpdateTime';
+  final String bearerTokenKey = 'bearerToken';
+  final String trackLocationKey = 'trackLocation';
+  final String syncUpStartedKey = 'syncUpStarted';
+
   Prefs({required this.mySharedPref});
 
-  Future<void> save({
+  T? get<T>(String key) => mySharedPref.get<T?>(key);
+
+  Future<void> reload() async => await mySharedPref.reload();
+
+  Future<bool> save({
+    String? key,
+    dynamic value,
     String? userId,
     double? latitude,
     double? longitude,
@@ -13,63 +30,59 @@ class Prefs {
     String? password,
     String? latLongInsertUpdateTime,
     String? bearerToken,
-    bool? trackLocation
+    bool? trackLocation,
+    bool? syncUpStarted,
   }) async {
+    bool response = false;
+    if (key != null && value != null) {
+      response = await mySharedPref.put(key, value);
+    }
     if (userId != null) {
-      mySharedPref.put('userId', userId);
+      response = await mySharedPref.put(userIdKey, userId);
     }
     if (latitude != null) {
-      mySharedPref.put('latitude', latitude);
+      response = await mySharedPref.put(latitudeKey, latitude);
     }
     if (longitude != null) {
-      mySharedPref.put('longitude', longitude);
+      response = await mySharedPref.put(longitudeKey, longitude);
     }
     if (userName != null) {
-      mySharedPref.put('userName', userName);
+      response = await mySharedPref.put(userNameKey, userName);
     }
     if (password != null) {
-      mySharedPref.put('password', password);
+      response = await mySharedPref.put(passwordKey, password);
     }
     if (latLongInsertUpdateTime != null) {
-      mySharedPref.put('latLongInsertUpdateTime', latLongInsertUpdateTime);
+      response = await mySharedPref.put(latLongInsertUpdateTimeKey, latLongInsertUpdateTime);
     }
     if (bearerToken != null) {
-      mySharedPref.put('bearerToken', bearerToken);
+      response = await mySharedPref.put(bearerTokenKey, bearerToken);
     }
     if (trackLocation != null) {
-      mySharedPref.put('trackLocation', trackLocation);
+      response = await mySharedPref.put(trackLocationKey, trackLocation);
     }
+    if (syncUpStarted != null) {
+      response = await mySharedPref.put(syncUpStartedKey, syncUpStarted);
+    }
+
+    return response;
   }
 
-  String? getUserId() {
-    return mySharedPref.get<String>('userId');
-  }
+  String? getUserId() => mySharedPref.get<String>(userIdKey);
 
-  double? getLatitude() {
-    return mySharedPref.get<double>('latitude');
-  }
+  double? getLatitude() => mySharedPref.get<double>(latitudeKey);
 
-  double? getLongitude() {
-    return mySharedPref.get<double>('longitude');
-  }
+  double? getLongitude() => mySharedPref.get<double>(longitudeKey);
 
-  double? getUserName() {
-    return mySharedPref.get<double>('userName');
-  }
+  double? getUserName() => mySharedPref.get<double>(userNameKey);
 
-  String? getPassword() {
-    return mySharedPref.get<String>('password');
-  }
+  String? getPassword() => mySharedPref.get<String>(passwordKey);
 
-  String? getLatLongInsertUpdateTime() {
-    return mySharedPref.get<String>('latLongInsertUpdateTime');
-  }
+  String? getLatLongInsertUpdateTime() => mySharedPref.get<String>(latLongInsertUpdateTimeKey);
 
-  String? getBearerToken() {
-    return mySharedPref.get<String>('bearerToken');
-  }
+  String? getBearerToken() => mySharedPref.get<String>(bearerTokenKey);
 
-  bool? isTracking() {
-    return mySharedPref.get<bool>('trackLocation');
-  }
+  bool? isTracking() => mySharedPref.get<bool>(trackLocationKey);
+
+  bool? getSyncUpStatus() => mySharedPref.get<bool>(syncUpStartedKey);
 }

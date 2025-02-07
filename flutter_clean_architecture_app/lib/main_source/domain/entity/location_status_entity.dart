@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class LocationStatusEntity with EquatableMixin {
-  final double? latitude;
-  final double? longitude;
-  final String? latLongInsertUpdateTime;
-  final int? status;
-  final String? id;
-  final String? userId;
+class LocationStatusEntity {
+  double? latitude;
+  double? longitude;
+  String? latLongInsertUpdateTime;
+  int? status;
+  String? id;
+  String? userId;
 
   LocationStatusEntity({
     this.latitude,
@@ -17,13 +17,4 @@ class LocationStatusEntity with EquatableMixin {
     this.userId,
   });
 
-  @override
-  List<Object?> get props => [
-        latitude,
-        longitude,
-        latLongInsertUpdateTime,
-        status,
-        id,
-        userId,
-      ];
 }

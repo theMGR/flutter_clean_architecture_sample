@@ -1,6 +1,7 @@
 import 'dart:isolate';
 
-import 'package:flearn/f_praticals/source/config/api/dio_client.dart';
+import 'dio_client.dart';
+
 
 
 class IsolateParser<T> {

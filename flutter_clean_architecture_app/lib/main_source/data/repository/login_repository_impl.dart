@@ -1,31 +1,14 @@
-import 'package:flearn/flutter_architecture_sample/layers/data/source/local/local_storage.dart';
-import 'package:flearn/flutter_architecture_sample/layers/data/source/network/api.dart';
-import 'package:flearn/flutter_architecture_sample/layers/domain/entity/character.dart';
-import 'package:flearn/flutter_architecture_sample/layers/domain/repository/character_repository.dart';
 import 'package:flearn/main_source/data/dto/location_status_dto.dart';
+import 'package:flearn/main_source/data/dto/user_status_dto.dart';
+import 'package:flearn/main_source/data/source/local/prefs.dart';
+import 'package:flearn/main_source/data/source/network/dio_api_service/dio_api_service.dart';
 import 'package:flearn/main_source/domain/repository/login_repository.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
-  final Api _api;
-  final LocalStorage _localStorage;
+  final DioApiService dioApiService;
+  final Prefs prefs;
 
-  LoginRepositoryImpl({
-    required Api api,
-    required LocalStorage localStorage,
-  })  : _api = api,
-        _localStorage = localStorage;
-
-  @override
-  Future<List<Character>> getCharacters({int page = 0}) async {
-    final cachedList = _localStorage.loadCharactersPage(page: page);
-    if (cachedList.isNotEmpty) {
-      return cachedList;
-    }
-
-    final fetchedList = await _api.loadCharacters(page: page);
-    await _localStorage.saveCharactersPage(page: page, list: fetchedList);
-    return fetchedList;
-  }
+  LoginRepositoryImpl({required this.dioApiService, required this.prefs});
 
   @override
   Future<LocationStatusDto> updateLocation(LocationStatusDto locationStatusDto) {
@@ -64,5 +47,11 @@ class LoginRepositoryImpl implements LoginRepository {
     }*/
 
     return false;
+  }
+
+  @override
+  Future<LocationStatusDto> updateUUserStatus(UserStatusDto userStatusDto) {
+    // TODO: implement updateUUserStatus
+    throw UnimplementedError();
   }
 }

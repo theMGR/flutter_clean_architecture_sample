@@ -9,15 +9,15 @@ import 'package:flearn/main_source/common_src/flavor_res/app_strings.dart';
 import 'package:flearn/main_source/configuration/config/config.dart';
 import 'package:flearn/main_source/configuration/services/geofence/geofence_service.dart';
 import 'package:flearn/main_source/data/dto/location_status_dto.dart';
+import 'package:flearn/main_source/data/dto/user_status_dto.dart';
 import 'package:flearn/main_source/data/source/local/prefs.dart';
+import 'package:flearn/main_source/domain/usecase/login_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart' as bg;
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart';
-import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'local_data_service.dart';
+import 'local_data_sync_up_process.dart';
 
 class LocationTrackByTransistor {
   final _locationStatusBehaviorSubject = BehaviorSubject<LocationStatusDto>();
@@ -26,6 +26,8 @@ class LocationTrackByTransistor {
 
   final GeofenceService geofenceService;
   final Prefs prefs;
+  final UserStatusUpdateUseCase userStatusUpdateUseCase;
+  final LocalDataSyncUpProcess localDataSyncUpProcess;
 
   // distanceFilter: 100 meters, stopTimeout: 5min
 
@@ -50,7 +52,7 @@ class LocationTrackByTransistor {
       geofenceModeHighAccuracy: true,
       showsBackgroundLocationIndicator: true);
 
-  LocationTrackByTransistor(this.geofenceService, this.prefs);
+  LocationTrackByTransistor({required this.geofenceService, required this.prefs, required this.userStatusUpdateUseCase, required this.localDataSyncUpProcess});
 
   Future<LocationTrackByTransistor> backgroundFetchConfig() async {
     int status = await BackgroundFetch.configure(
@@ -98,15 +100,15 @@ class LocationTrackByTransistor {
         ).then((Location location) async {
           debugPrint('===GET_CURRENT_LOCATION_FOREGROUND===$location');
           await updateDriverStatusByTransistor(
-            location.coords.latitude,
-            location.coords.longitude,
-            location.isMoving,
-            location.activity.type,
-            location.battery.isCharging,
-            location.battery.level.toString(),
-            location.coords.speed.toString(),
-            location.event,
-            'Connectivity Change Foreground',
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            isMoving: location.isMoving,
+            locationActivityType: location.activity.type,
+            isCharging: location.battery.isCharging,
+            battery: location.battery.level.toString(),
+            speed: location.coords.speed.toString(),
+            event: location.event,
+            mobileMode: 'Connectivity Change Foreground',
           );
         });
       }
@@ -128,15 +130,15 @@ class LocationTrackByTransistor {
       if (heartbeatEvent.location != null) {
         heartbeatEvent.location!.sample = true;
         await updateDriverStatusByTransistor(
-          heartbeatEvent.location!.coords.latitude,
-          heartbeatEvent.location!.coords.longitude,
-          heartbeatEvent.location!.isMoving,
-          heartbeatEvent.location!.activity.type,
-          heartbeatEvent.location!.battery.isCharging,
-          heartbeatEvent.location!.battery.level.toString(),
-          heartbeatEvent.location!.coords.speed.toString(),
-          heartbeatEvent.location!.event,
-          'Foreground',
+          latitude: heartbeatEvent.location!.coords.latitude,
+          longitude: heartbeatEvent.location!.coords.longitude,
+          isMoving: heartbeatEvent.location!.isMoving,
+          locationActivityType: heartbeatEvent.location!.activity.type,
+          isCharging: heartbeatEvent.location!.battery.isCharging,
+          battery: heartbeatEvent.location!.battery.level.toString(),
+          speed: heartbeatEvent.location!.coords.speed.toString(),
+          event: heartbeatEvent.location!.event,
+          mobileMode: 'Foreground',
         );
       } else {
         debugPrint('===FOREGROUND_HEARTBEAT_LOCATION_NULL===');
@@ -153,15 +155,15 @@ class LocationTrackByTransistor {
       debugPrint('==LOCATION_FOREGROUND==$location');
       if (location.activity.type != StringConstant.bgStill) {
         await updateDriverStatusByTransistor(
-          location.coords.latitude,
-          location.coords.longitude,
-          location.isMoving,
-          location.activity.type,
-          location.battery.isCharging,
-          location.battery.level.toString(),
-          location.coords.speed.toString(),
-          location.event.isNotEmpty ? location.event : 'location',
-          'Foreground',
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          isMoving: location.isMoving,
+          locationActivityType: location.activity.type,
+          isCharging: location.battery.isCharging,
+          battery: location.battery.level.toString(),
+          speed: location.coords.speed.toString(),
+          event: location.event.isNotEmpty ? location.event : 'location',
+          mobileMode: 'Foreground',
         );
       }
     });
@@ -199,58 +201,37 @@ class LocationTrackByTransistor {
     bg.BackgroundGeolocation.reset(config);
   }
 
-  Future<void> updateDriverStatusByTransistor(double? lat, double? long, bool? isMoving, String? activitytype, bool? isCharging, String? battery, String? speed, String? event, String? mobileMode) async {
-    KiwiContainer container = KiwiContainer();
-    GeofenceService geofenceService = new GeofenceService();
-    //var customLocationUpdates = container<CustomLocationUpdates>();
-    CustomSharedPrefs customSharedPrefs = CustomSharedPrefs();
-    var customLocationUpdates = new CustomLocationUpdates(customSharedPrefs);
-    var driverStatusModel = new DriverStatusModel();
-    var appVersion = await Utils.getApplicationInfo();
-    if (customLocationUpdates == null) {
-      customLocationUpdates = new CustomLocationUpdates(customSharedPrefs);
-    }
-    try {
-      container.clear();
-    } on Exception catch (e) {
-      debugPrint('==KIWI_ERROR==$e');
-    }
-    await diConfig(null, baseUrl: AppStrings.get()!.baseUrl, webSocketUrl: AppStrings.get()!.webSocketUrl, s3ImgUploadUrl: AppStrings.get()!.s3ImgUploadUrl, vahanApiUrl: AppStrings.get()!.vahanApiUrl);
-    container.silent = true;
-    await customSharedPrefs.getRefresh();
-
+  Future<void> updateDriverStatusByTransistor({double? latitude, double? longitude, bool? isMoving, String? locationActivityType, bool? isCharging, String? battery, String? speed, String? event, String? mobileMode, String activeStatusTypeId = StringConstant.userActive}) async {
     if (await hasInternetConnection() == true && await getCurrentPosition() != null) {
-      driverStatusModel.longitude = double.parse(long!.toStringAsFixed(7));
-      driverStatusModel.latitude = double.parse(lat!.toStringAsFixed(7));
-      driverStatusModel.tblStatusTypesId = StringConstant.DRIVER_ACTIVE;
-      driverStatusModel.driverId = await customSharedPrefs.getUserId();
-      driverStatusModel.isMoving = isMoving;
-      driverStatusModel.activitytype = activitytype;
-      driverStatusModel.isCharging = isCharging;
-      driverStatusModel.battery = battery;
-      driverStatusModel.speed = '$speed # v${appVersion.version}';
-      driverStatusModel.event = event;
-      driverStatusModel.mobileMode = mobileMode;
-      Get.lazyPut(() => UpdateDriverStatusUseCase());
-      var result = await Get.find<UpdateDriverStatusUseCase>().execute(driverStatusModel).catchError((e) {
-        debugPrint("=====CATCH_ERROR====$e");
+      var userStatusDto = UserStatusDto();
+      userStatusDto.longitude = double.parse(longitude!.toStringAsFixed(7));
+      userStatusDto.latitude = double.parse(latitude!.toStringAsFixed(7));
+      userStatusDto.activeStatusTypeId = activeStatusTypeId;
+      userStatusDto.driverId = prefs.getUserId();
+      userStatusDto.isMoving = isMoving;
+      userStatusDto.locationActivityType = locationActivityType;
+      userStatusDto.isCharging = isCharging;
+      userStatusDto.battery = battery;
+      userStatusDto.speed = '$speed # v${(await getApplicationInfo()).version}';
+      userStatusDto.event = event;
+      userStatusDto.mobileMode = mobileMode;
+
+      userStatusUpdateUseCase.call(userStatusDto).then((result) async{
+        if (result != null && result.status == 1) {
+          if (_locationStatusBehaviorSubject.isClosed == false) {
+            _locationStatusBehaviorSubject.sink.add(result);
+          }
+          await prefs.save(latitude: result.latitude, longitude: result.longitude, latLongInsertUpdateTime: result.latLongInsertUpdateTime);
+          debugPrint('===LOCATION UPDATE SUCCESS===');
+        } else {
+          debugPrint('===LOCATION UPDATE FAILURE===');
+        }
+      }).catchError((e) {
+        debugPrint("=====CATCH_ERROR==== $e");
       });
 
-      if (result != null && result.status == 1) {
-        if (!driverInfo.isClosed) driverInfo.sink.add(result);
-
-        if (_locationStatusBehaviorSubject.isClosed == false) {
-          _locationStatusBehaviorSubject.sink.add(result);
-        }
-        customSharedPrefs.saveDriverLastLocation(result.latitude, result.longitude, result.latLongInsertUpdateTime);
-        debugPrint('===LOCATION UPDATE SUCCESS===');
-      } else {
-        debugPrint('===LOCATION UPDATE FAILURE===');
-      }
-
-      await customSharedPrefs.getRefresh();
-      if (await customSharedPrefs.getSyncUpStatus() != true) {
-        syncLocalData(customSharedPrefs, container);
+      if (prefs.getSyncUpStatus() != true) {
+        syncLocalData();
       }
     } else {
       debugPrint("=====USER OFFLINE====");
@@ -261,32 +242,23 @@ class LocationTrackByTransistor {
     _locationStatusBehaviorSubject.close();
   }
 
-  syncLocalData() async {
-    if (GetIt.I.isRegistered<MySharedPref>() == true && GetIt.I.isRegistered<LocalDataService>() == true) {
-      await GetIt.I<MySharedPref>().reload();
-
-      await GetIt.I<LocalDataService>().getNotSyncedSavedData().then((value) async {
-        GetIt.I<LocalDataService>().pushAllSavedData();
-      });
-    }
+  Future<void> syncLocalData() async {
+    await localDataSyncUpProcess.getNotSyncedSavedData().then((value) async {
+      localDataSyncUpProcess.pushAllSavedData();
+    });
   }
 
   bgFetch(String taskId) async {
     try {
-      GeofenceService geofenceService = new GeofenceService();
       var location = await bg.BackgroundGeolocation.getCurrentPosition(samples: 1, extras: {"event": "background-fetch", "headless": true});
       debugPrint("+++[Headless] ${location.coords.latitude}${location.coords.longitude}${DateTime.now().toIso8601String()}");
       //Every one min Toast showing with LatLng
       //CustomAlerts.CustomToast("+++[location] ${location.coords.latitude}${location.coords.longitude}${DateTime.now().toIso8601String()}",Get.overlayContext,duration: 5);
       //debugPrint("CurrentLocation${location.coords.latitude}${location.coords.longitude}${DateTime.now().toIso8601String()}");
-      if (location != null) {
-        if (!Flavor.isCA()) {
-          geofenceService.geofence(
-            location.coords.latitude,
-            location.coords.longitude,
-          );
-        }
-      }
+      geofenceService.geofence(
+        location.coords.latitude,
+        location.coords.longitude,
+      );
     } catch (error) {
       debugPrint("[location] ERROR: $error");
     }

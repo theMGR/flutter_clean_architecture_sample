@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flearn/main_source/common_src/constants/value_constant.dart';
 import 'package:flearn/main_source/common_src/flavor_res/app_strings.dart';
 import 'package:flearn/main_source/configuration/app_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 var appConfiguration = AppConfiguration(
@@ -50,3 +52,13 @@ Dio getDio({required String baseUrl, String? bearerToken}) => Dio(
         },
       ),
     );
+
+Future<PackageInfo> getApplicationInfo() async {
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  String appName = packageInfo.appName;
+  String packageName = packageInfo.packageName;
+  String version = packageInfo.version;
+  String buildNumber = packageInfo.buildNumber;
+  debugPrint('RDX====> info: $appName | $packageName | $version | $buildNumber');
+  return packageInfo;
+}
