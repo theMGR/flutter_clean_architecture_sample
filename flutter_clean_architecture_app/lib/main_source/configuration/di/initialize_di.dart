@@ -24,7 +24,8 @@ Future<void> initializeDi() async {
   MySharedPref mySharedPref = MySharedPref();
   Prefs prefs = Prefs(mySharedPref: mySharedPref);
   DioApiService dioApiService = DioApiService(dio: getDio(baseUrl: AppStrings.get().baseUrl()), prefs: prefs);
-  GeofenceService geofenceService = GeofenceService();
+  LocalDataSyncUpProcess localDataSyncUpProcess = LocalDataSyncUpProcess();
+  GeofenceService geofenceService = GeofenceService(localDataSyncUpProcess: localDataSyncUpProcess);
 
   InternetConnectionServiceUsingGetXService internetConnectionServiceUsingGetXService = await InternetConnectionServiceUsingGetXService().init();
   InternetConnectionServiceUsingValueNotifier internetConnectionServiceUsingValueNotifier = await InternetConnectionServiceUsingValueNotifier().init();
@@ -37,11 +38,17 @@ Future<void> initializeDi() async {
   LocationUpdateUseCase locationUpdateUseCase = LocationUpdateUseCase(repository: loginRepository);
   UserStatusUpdateUseCase userStatusUpdateUseCase = UserStatusUpdateUseCase(repository: loginRepository);
 
-  LocationTrackByTransistor locationTrackByTransistor = await LocationTrackByTransistor(geofenceService: geofenceService, prefs: prefs, userStatusUpdateUseCase: userStatusUpdateUseCase).backgroundFetchConfig();
-  LocationUpdateService locationUpdateService = LocationUpdateService(prefs: prefs, locationTrackByTransistor: locationTrackByTransistor, locationUpdateUseCase: locationUpdateUseCase);
-
-  LocalDataSyncUpProcess localDataSyncUpProcess = LocalDataSyncUpProcess();
-
+  LocationTrackByTransistor locationTrackByTransistor = await LocationTrackByTransistor(
+    geofenceService: geofenceService,
+    prefs: prefs,
+    userStatusUpdateUseCase: userStatusUpdateUseCase,
+    localDataSyncUpProcess: localDataSyncUpProcess,
+  ).backgroundFetchConfig();
+  LocationUpdateService locationUpdateService = LocationUpdateService(
+    prefs: prefs,
+    locationTrackByTransistor: locationTrackByTransistor,
+    locationUpdateUseCase: locationUpdateUseCase,
+  );
 
   // GET-IT
   getIt.registerLazySingleton<AppConfiguration>(() => appConfig);
@@ -80,8 +87,7 @@ Future<void> initializeDi() async {
   Get.lazyPut<LocalDataSyncUpProcess>(() => localDataSyncUpProcess);
 }
 
-
-Future<void> resetDi() async{
+Future<void> resetDi() async {
   GetIt.I.reset();
   Get.deleteAll();
   await initializeDi();
