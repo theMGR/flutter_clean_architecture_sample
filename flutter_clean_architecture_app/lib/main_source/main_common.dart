@@ -6,6 +6,7 @@ import 'package:background_fetch/background_fetch.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flearn/main_source/configuration/config/notification_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,82 +17,31 @@ import 'package:get_it/get_it.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'configuration/app_config.dart';
-import '../main_config/di/di_injector.dart';
-import '../main_config/services/location_track_transistor.dart';
+import 'configuration/di/initialize_di.dart';
+import 'data/source/local/prefs.dart';
 
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-/// Streams are created so that app can respond to notification-related events
-/// since the plugin is initialised in the `main` function
-final BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject = BehaviorSubject<ReceivedNotification>();
-
-final BehaviorSubject<String?> selectNotificationSubject = BehaviorSubject<String?>();
-
-const MethodChannel platform = MethodChannel('dexterx.dev/flutter_local_notifications_example');
-
-class ReceivedNotification {
-  ReceivedNotification({
-    required this.id,
-    required this.title,
-    required this.body,
-    required this.payload,
-  });
-
-  final int id;
-  final String? title;
-  final String? body;
-  final String? payload;
-}
 
 
 void mainCommon() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await initializeDi();
 
   await Firebase.initializeApp();
 
-
-
-
+  await initializeFlutterLocalNotification();
 
   if (kDebugMode) {
-    // Force disable Crashlytics collection while doing every day development.
-    // Temporarily toggle this to true if you want to test crash reporting in your app.
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   } else {
-    // Handle Crashlytics enabled status when not in Debug,
-    // e.g. allow your users to opt-in to crash reporting.
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   }
 
-  if (FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
-    var aUserID = await CustomSharedPrefs().getUserId() ?? '';
-    FirebaseCrashlytics.instance.setUserIdentifier(aUserID);
+  if (FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled && GetIt.I.isRegistered<Prefs>()== true && GetIt.I.get<Prefs>().getUserId() != null) {
+    FirebaseCrashlytics.instance.setUserIdentifier(GetIt.I.get<Prefs>().getUserId() ?? '');
   }
 
-  //final NotificationAppLaunchDetails? notificationAppLaunchDetails = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 
-  const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  /// Note: permissions aren't requested here just to demonstrate that can be
-  /// done later
-  final IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
-      onDidReceiveLocalNotification: (int id, String? title, String? body, String? payload) async {
-        didReceiveLocalNotificationSubject.add(ReceivedNotification(id: id, title: title, body: body, payload: payload));
-      });
-  const MacOSInitializationSettings initializationSettingsMacOS = MacOSInitializationSettings(requestAlertPermission: false, requestBadgePermission: false, requestSoundPermission: false);
-  final InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS, macOS: initializationSettingsMacOS);
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: (String? payload) async {
-    if (payload != null) {
-      debugPrint('RDX=====> notification payload: $payload');
-    }
-    selectNotificationSubject.add(payload);
-  });
 
   try {
     await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(

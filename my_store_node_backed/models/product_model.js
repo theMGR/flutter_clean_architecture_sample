@@ -36,16 +36,16 @@ const productSchema = mongoose.Schema({
     popular: {
         type: Boolean,
         default: false, // Default value false
-       
-    },
-   
 
-    recommed:{
-        type:Boolean,
+    },
+
+
+    recommed: {
+        type: Boolean,
         default: true,
     }
 });
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = {Product,productSchema};
+module.exports = { Product, productSchema };

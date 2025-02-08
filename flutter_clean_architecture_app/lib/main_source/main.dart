@@ -4,8 +4,6 @@ import 'package:flutter_background_geolocation/flutter_background_geolocation.da
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart';
 
 import 'main_common.dart';
-import 'configuration/app_config.dart';
-import '../common_src/flavor_res/app_strings.dart';
 
 void main() {
 

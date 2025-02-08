@@ -1,7 +1,21 @@
+ext {
+    compileSdkVersion = 35                // or higher / as desired
+    targetSdkVersion = 35                // or higher / as desired
+    minSdkVersion = 23                // Required minimum
+    appCompatVersion = "1.4.2"           // or higher / as desired
+    playServicesLocationVersion = "21.0.1"  // or higher / as desired
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "${project(':background_fetch').projectDir}/libs" }
+        // [required] flutter_background_geolocation
+        maven { url "${project(':flutter_background_geolocation').projectDir}/libs" }
+        //maven { url 'https://developer.huawei.com/repo/' }
+        // [required] background_fetch
+        maven { url "${project(':background_fetch').projectDir}/libs" }
     }
 }
 

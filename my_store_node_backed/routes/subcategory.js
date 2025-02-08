@@ -4,15 +4,15 @@ const SubCategory = require('../models/sub_category_models');
 const Category = require('../models/category_models');
 
 subCategoryRouter.post('/api/subcategory', async (req, res) => {
-   try {
-       const { categoryId, categoryName, image, subcategoryName } = req.body;
-       const subcategory = new SubCategory({ categoryId, categoryName, image, subcategoryName });
-       await subcategory.save();
-       res.status(201).send(subcategory);
-   } catch (error) {
-       console.error('Error creating subcategory:', error);
-       res.status(400).json({ error: error.message });
-   }
+    try {
+        const { categoryId, categoryName, image, subcategoryName } = req.body;
+        const subcategory = new SubCategory({ categoryId, categoryName, image, subcategoryName });
+        await subcategory.save();
+        res.status(201).send(subcategory);
+    } catch (error) {
+        console.error('Error creating subcategory:', error);
+        res.status(400).json({ error: error.message });
+    }
 });
 
 //get categoryName

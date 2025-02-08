@@ -73,7 +73,7 @@ class LocationUpdateService {
   }
 
   Future<bool> changeDriverStatus() async {
-    if (await prefs.isTracking() == true) {
+    if (prefs.isTracking() == true) {
       await stopLocationUpdates();
     }
     var data = await Get.find<LoginRepository>().changeDriverStatus(ValueConstant.LOGIN_STATUS_VALID);

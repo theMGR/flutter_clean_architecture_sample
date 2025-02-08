@@ -1,20 +1,20 @@
 const express = require('express');
 const { auth } = require('../middleware/auth');
-const {Product} = require('../models/product_model');
+const { Product } = require('../models/product_model');
 const productRouter = express.Router();
 
-productRouter.post('/post/add-product',async (req, res) => {
+productRouter.post('/post/add-product', async (req, res) => {
 
-    try {
-    const {productName, productPrice, discount,quantity,description,category, images } = req.body;
-    const product = new Product({productName, productPrice, discount,quantity,description,category, images,  });
-    
+  try {
+    const { productName, productPrice, discount, quantity, description, category, images } = req.body;
+    const product = new Product({ productName, productPrice, discount, quantity, description, category, images, });
+
     await product.save();
     res.status(201).send(product);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
 
-    }
+  }
 
 });
 
@@ -30,24 +30,24 @@ productRouter.get('/api/products', async (req, res) => {
   }
 });
 
-  //get product by category
+//get product by category
 
 productRouter.get('/category/products', async (req, res) => {
-    try {
-        // Check if category query parameter is provided
-        const category = req.query.category;
-        let products;
-        if (category) {
-            // Find products where category matches the query parameter
-            products = await Product.find({ category: category });
-        } else {
-            // If no category provided, return all products
-            products = await Product.find();
-        }
-        res.status(200).json(products); // Send the products as JSON response
-    } catch (error) {
-        res.status(500).json({ error: error.message }); // Send error response
+  try {
+    // Check if category query parameter is provided
+    const category = req.query.category;
+    let products;
+    if (category) {
+      // Find products where category matches the query parameter
+      products = await Product.find({ category: category });
+    } else {
+      // If no category provided, return all products
+      products = await Product.find();
     }
+    res.status(200).json(products); // Send the products as JSON response
+  } catch (error) {
+    res.status(500).json({ error: error.message }); // Send error response
+  }
 });
 
 
