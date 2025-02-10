@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flearn/main_source/common_src/helper/utils/print_utils.dart';
+import 'package:flearn/main_source/common_src/utils/print_utils.dart';
 import 'package:flutter/foundation.dart' as foundation_;
 import 'package:shared_preferences/shared_preferences.dart';
 

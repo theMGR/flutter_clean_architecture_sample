@@ -6,8 +6,9 @@ import 'package:background_fetch/background_fetch.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flearn/main_source/configuration/config/firebase_messaging_config.dart';
 import 'package:flearn/main_source/configuration/config/notification_config.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flearn/main_source/configuration/services/location_update_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,7 @@ void mainCommon() async {
   await Firebase.initializeApp();
 
   await initializeFlutterLocalNotification();
+  await initializeFirebaseMessaging();
 
   if (kDebugMode) {
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
@@ -60,14 +62,14 @@ void mainCommon() async {
     //LocationPlusSyncUpService.startLocationService(config, true);
   }
 
-  // WDSILocationService.init(config);
 
-  CustomSharedPrefs customSharedPrefsL = CustomSharedPrefs();
-  CustomLocationUpdates? locationUpdates = new CustomLocationUpdates(customSharedPrefsL);
-  print("===LOCATION BACKGROUND RUN SERVICE FROM MAIN COMMON====");
-  await locationUpdates.startLocationUpdates('from Re-Enter to App');
-  if (!Flavor.isCA() && await BackgroundFetch.status != BackgroundFetch.STATUS_AVAILABLE) {
-    BackgroundFetch.start();
+  if(GetIt.I.isRegistered<LocationUpdateService>() == true) {
+    LocationUpdateService locationUpdateService = GetIt.I.get<LocationUpdateService>();
+    debugPrint("===LOCATION BACKGROUND RUN SERVICE FROM MAIN COMMON====");
+    await locationUpdateService.startLocationUpdates();
+    if (await BackgroundFetch.status != BackgroundFetch.STATUS_AVAILABLE) {
+      BackgroundFetch.start();
+    }
   }
 }
 

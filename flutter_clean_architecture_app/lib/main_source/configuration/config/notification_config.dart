@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flearn/main_source/common_src/flavor/flavor.dart';
+import 'package:flearn/main_source/common_src/utils/notification_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,10 +22,6 @@ final StreamController<String?> selectNotificationStream = StreamController<Stri
 //class ReceivedNotification {ReceivedNotification({required this.id, required this.title, required this.body, required this.payload,});final int id;final String? title;final String? body;final String? payload;}
 
 String? selectedNotificationPayload;
-
-
-
-
 
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
@@ -46,8 +44,6 @@ Future<void> initializeFlutterLocalNotification() async {
   }
 
   const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
-
-
 
   /// Note: permissions aren't requested here just to demonstrate that can be
   /// done later
@@ -185,6 +181,51 @@ Future<bool> requestNotificationPermissions() async {
     isEnabled = grantedNotificationPermission ?? false;
   }
   return isEnabled;
+}
+
+NotificationDetails getNotificationDetails({required String channelId, required String channelName, String? channelDescription, AndroidNotificationSound? androidSound, String? iosSound}) {
+  var androidPlatformChannelSpecifies = AndroidNotificationDetails(channelId, channelName,
+      channelDescription: channelDescription,
+      importance: Importance.max,
+      groupKey: Flavor.isPlus()
+          ? 'plus'
+          : Flavor.isLite()
+              ? 'lite'
+              : 'free',
+      groupAlertBehavior: GroupAlertBehavior.all,
+      priority: Priority.max,
+      visibility: NotificationVisibility.public,
+      color: Colors.blue,
+      channelShowBadge: true,
+      autoCancel: true,
+      enableVibration: true,
+      styleInformation: BigTextStyleInformation(''),
+      largeIcon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+      playSound: true,
+      sound: androidSound);
+  var iOSPlatformChannelSpecifics = DarwinNotificationDetails(presentAlert: true, presentSound: true, presentBadge: true, sound: iosSound);
+  var notificationDetails = NotificationDetails(android: androidPlatformChannelSpecifies, iOS: iOSPlatformChannelSpecifics);
+
+  return notificationDetails;
+}
+
+void showFlutterLocalNotification({
+  required String channelId,
+  required String channelName,
+  String? channelDescription,
+  AndroidNotificationSound? androidSound,
+  String? iosSound,
+  required int id,
+  String? title,
+  String? body,
+  String? payload,
+}) {
+  flutterLocalNotificationsPlugin.show(
+    id,
+    title,
+    body,
+    getNotificationDetails(channelId: channelId, channelName: channelName, channelDescription: channelDescription, androidSound: androidSound, iosSound: iosSound),
+  );
 }
 
 /*class NotificationUtils {
