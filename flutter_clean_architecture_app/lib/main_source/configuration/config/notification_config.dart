@@ -21,7 +21,7 @@ final StreamController<String?> selectNotificationStream = StreamController<Stri
 
 //class ReceivedNotification {ReceivedNotification({required this.id, required this.title, required this.body, required this.payload,});final int id;final String? title;final String? body;final String? payload;}
 
-String? selectedNotificationPayload;
+//String? selectedNotificationPayload;
 
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
@@ -36,12 +36,12 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 }
 
 Future<void> initializeFlutterLocalNotification() async {
-  final NotificationAppLaunchDetails? notificationAppLaunchDetails = !kIsWeb && Platform.isLinux ? null : await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  /*final NotificationAppLaunchDetails? notificationAppLaunchDetails = !kIsWeb && Platform.isLinux ? null : await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   String initialRoute = HomePage.routeName; // todo
   if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
     selectedNotificationPayload = notificationAppLaunchDetails!.notificationResponse?.payload;
     initialRoute = SecondPage.routeName; // todo
-  }
+  }*/
 
   const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
 
@@ -71,14 +71,19 @@ Future<void> initializeFlutterLocalNotification() async {
           selectNotificationStream.add(notificationResponse.payload);
           break;
         case NotificationResponseType.selectedNotificationAction:
-          if (notificationResponse.actionId == navigationActionId) {
+          selectNotificationStream.add(notificationResponse.payload);
+          /*if (notificationResponse.actionId == navigationActionId) {
             selectNotificationStream.add(notificationResponse.payload);
-          }
+          }*/
           break;
       }
     },
     onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
   );
+}
+
+Future<NotificationAppLaunchDetails?> getNotificationAppLaunchDetails() async {
+  return !kIsWeb && Platform.isLinux ? null : await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 }
 
 List<DarwinNotificationCategory> getDarwinNotificationCategories() {

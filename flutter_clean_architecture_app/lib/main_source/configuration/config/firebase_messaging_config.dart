@@ -5,12 +5,21 @@ import 'package:flutter/foundation.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  RemoteMessage remoteMessage = message;
   await Firebase.initializeApp();
+  if(message.notification == null) {
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+      if(message != null) {
+        remoteMessage = message;
+      }
+    });
+  }
+
   await _setupFlutterNotifications();
-  _showFlutterNotification(message);
+  _showFlutterNotification(remoteMessage);
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  print('Handling a background message ${message.messageId}');
+  print('Handling a background message ${remoteMessage.messageId}');
 }
 
 Future<void> _setupFlutterNotifications() async {

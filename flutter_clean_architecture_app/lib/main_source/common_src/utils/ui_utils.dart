@@ -253,7 +253,7 @@ class UIUtils {
     );
   }
 
-  static void showToast({required BuildContext? context, required String message}) {
+  static void showToast({required BuildContext? context, required String message, int seconds = 5}) {
     if (context != null) {
       FToast fToast = FToast();
       fToast.init(context);
@@ -271,7 +271,7 @@ class UIUtils {
       fToast.showToast(
         child: toast,
         gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
+        toastDuration: Duration(seconds: seconds),
       );
     }
   }

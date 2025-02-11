@@ -76,8 +76,9 @@ class LocationUpdateService {
     if (prefs.isTracking() == true) {
       await stopLocationUpdates();
     }
-    var data = await Get.find<LoginRepository>().changeDriverStatus(ValueConstant.LOGIN_STATUS_VALID);
-    debugPrint('Success: ${data}');
-    return Future.value(data);
+    //var data = await Get.find<LoginRepository>().changeDriverStatus(ValueConstant.LOGIN_STATUS_VALID);
+    //debugPrint('Success: ${data}');
+    //return Future.value(data);
+    return true;
   }
 }
